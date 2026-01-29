@@ -1,0 +1,451 @@
+script: "/main/gui.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "main"
+  texture: "/main/main.atlas"
+}
+nodes {
+  position {
+    x: 1276.0
+    y: 719.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NE
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: -21.0
+    y: -24.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "log"
+  font: "default"
+  id: "logtext"
+  pivot: PIVOT_NE
+  adjust_mode: ADJUST_MODE_STRETCH
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 3.0
+    y: 718.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "root"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_ZOOM
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 109.0
+    y: -88.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Touch"
+  font: "default"
+  id: "touch"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 459.0
+    y: -88.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box5_A"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "A"
+  font: "default"
+  id: "text4"
+  parent: "box5_A"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 518.0
+    y: -107.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    y: 0.8
+    z: 0.4
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box5_B"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "B"
+  font: "default"
+  id: "text5"
+  parent: "box5_B"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 323.0
+    y: -88.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box5_touch"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: 109.0
+    y: -174.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "mouse enter/leave"
+  font: "default"
+  id: "mouse_enter_leave"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 323.0
+    y: -173.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box2_A"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "A"
+  font: "default"
+  id: "text1"
+  parent: "box2_A"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 387.0
+    y: -192.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    y: 0.8
+    z: 0.4
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box2_B"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "B"
+  font: "default"
+  id: "text7"
+  parent: "box2_B"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 109.0
+    y: -254.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Drag"
+  font: "default"
+  id: "drag"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 323.0
+    y: -258.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box3"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: 109.0
+    y: -336.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Hover"
+  font: "default"
+  id: "hover"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 323.0
+    y: -340.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box4"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "A"
+  font: "default"
+  id: "text3"
+  parent: "box4"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 379.0
+    y: -360.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    y: 0.8
+    z: 0.4
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box44"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "B\n"
+  ""
+  font: "default"
+  id: "text6"
+  parent: "box44"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

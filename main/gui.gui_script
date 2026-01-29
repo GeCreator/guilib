@@ -1,0 +1,51 @@
+local guilib = require "guilib"
+
+local log_text_list = {}
+local log_counter = 0
+local function log(text)
+  log_counter = log_counter + 1
+  -- table.insert(log_text_list, text)
+  table.insert(log_text_list, 1, tostring(log_counter).. ". " .. text)
+  if #log_text_list>30 then
+    log_text_list[#log_text_list] = nil
+  end
+  local lognode = gui.get_node("logtext")
+  gui.set_text(lognode, table.concat(log_text_list, "\n"))
+end
+
+function init(self)
+  self.guilib = guilib.create()
+  -----------------------------------------------
+  self.guilib.add("box5_touch", {
+    touch = function() log("  Touch") end,
+    release = function() log("Release") end,
+  })
+  -----------------------------------------------
+  self.guilib.add("box5_A", { touch = function() log("A Clicked") end, })
+  self.guilib.add("box5_B", { touch = function() log("B Clicked") end, })
+  -----------------------------------------------
+  self.guilib.add("box2_A", {
+    enter = function() log("Enter A") end,
+    leave = function() log("Leave A") end,
+  })
+  self.guilib.add("box2_B", {
+    enter = function() log("Enter B") end,
+    leave = function() log("Leave B") end,
+  })
+  -----------------------------------------------
+  self.guilib.add("box3", {
+    touch = function() log("Drag Begin") end,
+    drag = function() log("Drag") end,
+    release = function() log("Drag End") end,
+  })
+  -----------------------------------------------
+  self.guilib.add("box4", { hover = function() log("Hover A") end, })
+  self.guilib.add("box44", { hover = function() log("Hover B") end, })
+end
+
+function on_input(self, action_id, action)
+  if action_id == hash("mouse_button_1") or action_id == hash("mouse_button_4") or action_id == hash("mouse_button_left") then
+  else
+    pprint(self.guilib.on_input(action_id, action))
+  end
+end
