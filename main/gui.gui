@@ -12,6 +12,10 @@ nodes {
     x: 644.0
     y: 360.0
   }
+  color {
+    x: 0.7019608
+    y: 0.8
+  }
   type: TYPE_BOX
   texture: "main/background"
   id: "background"
@@ -86,7 +90,7 @@ nodes {
   }
   size {
     x: 200.0
-    y: 100.0
+    y: 20.0
   }
   color {
     x: 0.0
@@ -98,87 +102,6 @@ nodes {
   font: "default"
   id: "touch"
   parent: "root"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 459.0
-    y: -88.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
-  type: TYPE_BOX
-  texture: "main/button"
-  id: "box5_A"
-  parent: "root"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
-}
-nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "A"
-  font: "default"
-  id: "text4"
-  parent: "box5_A"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 527.0
-    y: -107.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    y: 0.8
-    z: 0.4
-  }
-  type: TYPE_BOX
-  texture: "main/button"
-  id: "box5_B"
-  parent: "root"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
-}
-nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "B"
-  font: "default"
-  id: "text5"
-  parent: "box5_B"
   inherit_alpha: true
 }
 nodes {
@@ -197,7 +120,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button"
-  id: "box5_touch"
+  id: "box_touch"
   parent: "root"
   inherit_alpha: true
   slice9 {
@@ -209,12 +132,93 @@ nodes {
 }
 nodes {
   position {
+    x: 459.0
+    y: -88.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box_touch_A"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "A"
+  font: "default"
+  id: "text4"
+  parent: "box_touch_A"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 527.0
+    y: -107.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  color {
+    y: 0.8
+    z: 0.4
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box_touch_B"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "B"
+  font: "default"
+  id: "text5"
+  parent: "box_touch_B"
+  inherit_alpha: true
+}
+nodes {
+  position {
     x: 109.0
     y: -174.0
   }
   size {
     x: 200.0
-    y: 100.0
+    y: 20.0
   }
   color {
     x: 0.0
@@ -244,7 +248,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button"
-  id: "box2_A"
+  id: "box_enter_leave_A"
   parent: "root"
   inherit_alpha: true
   slice9 {
@@ -259,14 +263,14 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "A"
   font: "default"
   id: "text1"
-  parent: "box2_A"
+  parent: "box_enter_leave_A"
   inherit_alpha: true
 }
 nodes {
@@ -284,7 +288,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button"
-  id: "box2_B"
+  id: "box_enter_leave_B"
   parent: "root"
   inherit_alpha: true
   slice9 {
@@ -299,14 +303,14 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "B"
   font: "default"
   id: "text7"
-  parent: "box2_B"
+  parent: "box_enter_leave_B"
   inherit_alpha: true
 }
 nodes {
@@ -316,7 +320,7 @@ nodes {
   }
   size {
     x: 200.0
-    y: 100.0
+    y: 20.0
   }
   color {
     x: 0.0
@@ -346,7 +350,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button"
-  id: "box3"
+  id: "box_drag"
   parent: "root"
   inherit_alpha: true
   slice9 {
@@ -363,7 +367,7 @@ nodes {
   }
   size {
     x: 200.0
-    y: 100.0
+    y: 20.0
   }
   color {
     x: 0.0
@@ -393,7 +397,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button"
-  id: "box4"
+  id: "box_hover_A"
   parent: "root"
   inherit_alpha: true
   slice9 {
@@ -408,14 +412,14 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "A"
   font: "default"
   id: "text3"
-  parent: "box4"
+  parent: "box_hover_A"
   inherit_alpha: true
 }
 nodes {
@@ -433,7 +437,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button"
-  id: "box44"
+  id: "box_hover_B"
   parent: "root"
   inherit_alpha: true
   slice9 {
@@ -448,15 +452,15 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "B\n"
   ""
   font: "default"
   id: "text6"
-  parent: "box44"
+  parent: "box_hover_B"
   inherit_alpha: true
 }
 nodes {
@@ -466,7 +470,7 @@ nodes {
   }
   size {
     x: 200.0
-    y: 100.0
+    y: 20.0
   }
   color {
     x: 0.0
@@ -511,8 +515,8 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "A"
@@ -552,8 +556,8 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "B"
@@ -593,8 +597,8 @@ nodes {
     x: -2.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 20.0
+    y: 20.0
   }
   type: TYPE_TEXT
   text: "C"
