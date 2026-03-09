@@ -28,9 +28,11 @@ function init(self)
   self.guilib.add("box_enter_leave_B", { enter = function() log("Enter B") end, leave = function() log("Leave B") end, })
   -----------------------------------------------
   self.guilib.add("box_drag", {
-    touch = function() log("Drag Begin") end,
-    drag = function() log("Drag") end,
-    release = function() log("Drag End") end,
+    drag = function(action)
+      if action.drag_begin then log("Drag Begin")
+      elseif action.drag_end then log("Drag End")
+      else log("Drag") end
+    end,
   })
   -----------------------------------------------
   self.guilib.add("box_hover_A", { hover = function() log("Hover A") end, })

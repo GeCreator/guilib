@@ -4,8 +4,8 @@ local TOUCH_ACTION = hash('touch')
 local call_event = function(element, method, action)
   if method then
     action.node = element.node
-    local result = method(action, element)
-    if result==nil then return true else return result end
+    method(action, element)
+    return true
   end
 end
 
@@ -69,20 +69,24 @@ guilib.create = function()
     local catched = nil
     if action_id == TOUCH_ACTION then
       if dragged_node and action.released then
-        call_event(dragged_node, dragged_node.release, action)
+        action.drag_end = true
+        call_event(dragged_node, dragged_node.drag, action)
         dragged_node = nil
       end
       for _, element in ipairs(elements_with_touch) do
-        if overlap_enabled and catched~=nil then return catched end
+        if overlap_enabled and catched ~= nil then return catched end
         if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if action.pressed then
             catched = call_event(element, element.touch, action)
             __focus(element, action)
+            if element.drag then
+              action.drag_begin = true
+              dragged_node = element
+              call_event(dragged_node, dragged_node.drag, action)
+            end
           elseif action.released then
             catched = call_event(element, element.release, action)
             dragged_node = nil
-          elseif not dragged_node and element.drag then
-            dragged_node = element
           end
         end
       end
@@ -91,7 +95,7 @@ guilib.create = function()
         call_event(dragged_node, dragged_node.drag, action)
       end
       for _, element in ipairs(elements_with_hover) do
-        if overlap_enabled and catched~=nil then return catched end
+        if overlap_enabled and catched ~= nil then return catched end
         if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if not hovered_elements[element.node] then
             hovered_elements[element.node] = true
