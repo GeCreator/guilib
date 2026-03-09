@@ -18,6 +18,11 @@ guilib.create = function()
   local elements_with_touch = {}
   local elements_with_hover = {}
   local hovered_elements = {}
+  local overlap_enabled = true
+
+  M.set_overlap = function(enabled)
+    overlap_enabled = enabled
+  end
 
   --- Add element actions for node.
   --- Example: guilib.add("box", {
@@ -51,7 +56,7 @@ guilib.create = function()
         dragged_node = nil
       end
       for _, element in ipairs(elements_with_touch) do
-        if catched~=nil then return catched end
+        if overlap_enabled and catched~=nil then return catched end
         if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if action.pressed then
             catched = call_event(element, element.touch, action)
@@ -68,13 +73,14 @@ guilib.create = function()
         call_event(dragged_node, dragged_node.drag, action)
       end
       for _, element in ipairs(elements_with_hover) do
+        if overlap_enabled and catched~=nil then return catched end
         if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
-
           if not hovered_elements[element.node] then
             hovered_elements[element.node] = true
             call_event(element, element.enter, action)
           end
           call_event(element, element.hover, action)
+          catched = true
         else
           if hovered_elements[element.node] then
             hovered_elements[element.node] = nil
