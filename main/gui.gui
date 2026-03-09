@@ -9,6 +9,18 @@ textures {
 }
 nodes {
   position {
+    x: 644.0
+    y: 360.0
+  }
+  type: TYPE_BOX
+  texture: "main/background"
+  id: "background"
+  adjust_mode: ADJUST_MODE_ZOOM
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
     x: 1276.0
     y: 719.0
   }
@@ -17,7 +29,7 @@ nodes {
     y: 100.0
   }
   type: TYPE_BOX
-  id: "box"
+  id: "logbox"
   xanchor: XANCHOR_RIGHT
   yanchor: YANCHOR_TOP
   pivot: PIVOT_NE
@@ -45,7 +57,7 @@ nodes {
   id: "logtext"
   pivot: PIVOT_NE
   adjust_mode: ADJUST_MODE_STRETCH
-  parent: "box"
+  parent: "logbox"
   inherit_alpha: true
 }
 nodes {
@@ -131,7 +143,7 @@ nodes {
 }
 nodes {
   position {
-    x: 518.0
+    x: 527.0
     y: -107.0
   }
   size {
@@ -259,8 +271,8 @@ nodes {
 }
 nodes {
   position {
-    x: 387.0
-    y: -192.0
+    x: 390.0
+    y: -193.0
   }
   size {
     x: 100.0
@@ -408,7 +420,7 @@ nodes {
 }
 nodes {
   position {
-    x: 379.0
+    x: 390.0
     y: -360.0
   }
   size {
@@ -445,6 +457,150 @@ nodes {
   font: "default"
   id: "text6"
   parent: "box44"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 109.0
+    y: -453.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Focus/Blur"
+  font: "default"
+  id: "focus/blur"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 293.0
+    y: -454.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box_focus_A"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "A"
+  font: "default"
+  id: "text"
+  parent: "box_focus_A"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 344.0
+    y: -454.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box_focus_B"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "B"
+  font: "default"
+  id: "text2"
+  parent: "box_focus_B"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 396.0
+    y: -454.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button"
+  id: "box_focus_C"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "C"
+  font: "default"
+  id: "text8"
+  parent: "box_focus_C"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

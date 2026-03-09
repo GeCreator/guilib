@@ -24,14 +24,8 @@ function init(self)
   self.guilib.add("box5_A", { touch = function() log("A Clicked") end, })
   self.guilib.add("box5_B", { touch = function() log("B Clicked") end, })
   -----------------------------------------------
-  self.guilib.add("box2_A", {
-    enter = function() log("Enter A") end,
-    leave = function() log("Leave A") end,
-  })
-  self.guilib.add("box2_B", {
-    enter = function() log("Enter B") end,
-    leave = function() log("Leave B") end,
-  })
+  self.guilib.add("box2_A", { enter = function() log("Enter A") end, leave = function() log("Leave A") end, })
+  self.guilib.add("box2_B", { enter = function() log("Enter B") end, leave = function() log("Leave B") end, })
   -----------------------------------------------
   self.guilib.add("box3", {
     touch = function() log("Drag Begin") end,
@@ -41,6 +35,40 @@ function init(self)
   -----------------------------------------------
   self.guilib.add("box4", { hover = function() log("Hover A") end, })
   self.guilib.add("box44", { hover = function() log("Hover B") end, })
+  -----------------------------------------------
+  self.guilib.add("box_focus_A", {
+    touch = function() log("Click A") end,
+    focus = function(e)
+      log("Focus A")
+      gui.play_flipbook(e.node, "button_focus")
+    end,
+    blur = function(e)
+      log("Blur A")
+      gui.play_flipbook(e.node, "button")
+    end
+  })
+  self.guilib.add("box_focus_B", {
+    touch = function() log("Click B") end,
+    focus = function(e)
+      log("Focus B")
+      gui.play_flipbook(e.node, "button_focus")
+    end,
+    blur = function(e)
+      log("Blur B")
+      gui.play_flipbook(e.node, "button")
+    end
+  })
+  self.guilib.add("box_focus_C", {
+    touch = function() log("Click C") end,
+    focus = function(e)
+      log("Focus C")
+      gui.play_flipbook(e.node, "button_focus")
+    end,
+    blur = function(e)
+      log("Blur C")
+      gui.play_flipbook(e.node, "button")
+    end
+  })
 end
 
 function on_input(self, action_id, action)
