@@ -19,6 +19,23 @@ guilib.create = function()
   local elements_with_hover = {}
   local hovered_elements = {}
   local overlap_enabled = true
+  local focused_element = nil
+
+  local function __blur(action)
+    if focused_element then
+      call_event(focused_element, focused_element.blur, action)
+      focused_element = nil
+    end
+  end
+
+  local function __focus(element, action)
+    if focused_element == element then return end
+    if focused_element then
+      __blur(action)
+    end
+    focused_element = element
+    call_event(focused_element, focused_element.focus, action)
+  end
 
   M.set_overlap = function(enabled)
     overlap_enabled = enabled
@@ -60,6 +77,7 @@ guilib.create = function()
         if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if action.pressed then
             catched = call_event(element, element.touch, action)
+            __focus(element, action)
           elseif action.released then
             catched = call_event(element, element.release, action)
             dragged_node = nil
