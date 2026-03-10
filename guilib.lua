@@ -45,7 +45,8 @@ guilib.create = function()
   --- Example: guilib.add("box", {
   ---   touch = function(action) print("touch") end,
   ---   release = function(action) print("release") end,
-  ---   drag = function(action) print("drag") end,
+  ---   hold =  function(action) print("hold") end,
+  ---   drag =  function(action) print("drag") end,
   ---   enter = function(action) print("enter") end
   ---   leave = function(action) print("leave") end
   ---   hover = function(action) print("hover") end
@@ -97,8 +98,7 @@ guilib.create = function()
         call_event(dragged_node, dragged_node.drag, action)
       end
       for _, element in ipairs(elements_with_hover) do
-        if overlap_enabled and catched ~= nil then return catched end
-        if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
+        if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if not hovered_elements[element.node] then
             hovered_elements[element.node] = true
             call_event(element, element.enter, action)
