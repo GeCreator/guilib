@@ -60,11 +60,11 @@ guilib.create = function()
   end
 
   --- Process the input request. This feature is required, nothing will work without it.
-  --- ``` lua
+  --- Example:
   --- function on_input(self, action_id, action)
-  ---   self.guilib.on_input(action_id, action)
+  ---   return self.guilib.on_input(action_id, action)
   --- end
-  --- ```
+  ---@return boolean|nil is_catched return true if some registerd event will be called
   M.on_input = function(action_id, action)
     local catched = nil
     if action_id == TOUCH_ACTION then
