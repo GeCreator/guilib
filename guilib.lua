@@ -68,7 +68,26 @@ guilib.create = function()
   ---@return boolean|nil is_catched return true if some registerd event will be called
   M.on_input = function(action_id, action)
     local catched = nil
-    if action_id == TOUCH_ACTION then
+    if action_id == nil then
+      if dragged_node then
+        call_event(dragged_node, dragged_node.drag, action)
+      end
+      for _, element in ipairs(elements_with_hover) do
+        if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
+          if not hovered_elements[element.node] then
+            hovered_elements[element.node] = true
+            call_event(element, element.enter, action)
+          end
+          call_event(element, element.hover, action)
+          catched = true
+        else
+          if hovered_elements[element.node] then
+            hovered_elements[element.node] = nil
+            call_event(element, element.leave, action)
+          end
+        end
+      end
+    elseif action_id == TOUCH_ACTION then
       if dragged_node and action.released then
         action.drag_end = true
         call_event(dragged_node, dragged_node.drag, action)
@@ -90,25 +109,6 @@ guilib.create = function()
             dragged_node = nil
           else
             catched = call_event(element, element.hold, action)
-          end
-        end
-      end
-    elseif action_id == nil then
-      if dragged_node then
-        call_event(dragged_node, dragged_node.drag, action)
-      end
-      for _, element in ipairs(elements_with_hover) do
-        if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
-          if not hovered_elements[element.node] then
-            hovered_elements[element.node] = true
-            call_event(element, element.enter, action)
-          end
-          call_event(element, element.hover, action)
-          catched = true
-        else
-          if hovered_elements[element.node] then
-            hovered_elements[element.node] = nil
-            call_event(element, element.leave, action)
           end
         end
       end
