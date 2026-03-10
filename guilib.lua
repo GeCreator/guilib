@@ -54,7 +54,7 @@ guilib.create = function()
   ---@param element table table with event functions
   M.add = function(name, element)
     element.node = gui.get_node(name)
-    if element.touch or element.release or element.drag then table.insert(elements_with_touch, 1, element) end
+    if element.touch or element.release or element.drag or element.hold then table.insert(elements_with_touch, 1, element) end
     if element.hover or element.enter or element.leave then table.insert(elements_with_hover, 1, element) end
     return element
   end
@@ -87,6 +87,8 @@ guilib.create = function()
           elseif action.released then
             catched = call_event(element, element.release, action)
             dragged_node = nil
+          else
+            catched = call_event(element, element.hold, action)
           end
         end
       end

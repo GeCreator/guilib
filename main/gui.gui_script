@@ -18,7 +18,8 @@ function init(self)
   -----------------------------------------------
   self.guilib.add("box_touch", {
     touch = function() log("  Touch") end,
-    release = function() log("Release") end,
+    release = function() log("Released") end,
+    hold = function() log("Hold") end,
   })
   -----------------------------------------------
   self.guilib.add("box_touch_A", { touch = function() log("A Clicked") end, })
