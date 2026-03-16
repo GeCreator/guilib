@@ -9,7 +9,7 @@ Supported events: touch/release/hold/drag/enter/leave/hover
 ```lua
 -- file: my_gui.gui_script
 
-local guilib = require("guilib")
+local guilib = require("guilib.guilib")
 
 function init(self)
   self.guilib = guilib.create()
