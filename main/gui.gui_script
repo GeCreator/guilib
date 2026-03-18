@@ -1,4 +1,4 @@
-local guilib = require "guilib"
+local guilib = require "guilib.guilib"
 
 local log_text_list = {}
 local log_counter = 0
