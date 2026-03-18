@@ -17,9 +17,12 @@ guilib.create = function()
   local dragged_node = nil
   local elements_with_touch = {}
   local elements_with_hover = {}
-  local hovered_elements = {}
   local overlap_enabled = true
   local focused_element = nil
+
+  local hovered_elements = {}
+  local enter_elements = {}
+  local leave_elements = {}
 
   local function __blur(action)
     if focused_element then
@@ -72,21 +75,33 @@ guilib.create = function()
       if dragged_node then
         call_event(dragged_node, dragged_node.drag, action)
       end
+
       for _, element in ipairs(elements_with_hover) do
         if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if not hovered_elements[element.node] then
-            hovered_elements[element.node] = true
-            call_event(element, element.enter, action)
+            table.insert(enter_elements, element)
           end
           call_event(element, element.hover, action)
           catched = true
         else
           if hovered_elements[element.node] then
-            hovered_elements[element.node] = nil
-            call_event(element, element.leave, action)
+            table.insert(leave_elements, element)
           end
         end
       end
+
+      for i, element in ipairs(leave_elements) do
+        call_event(element, element.leave, action)
+        hovered_elements[element.node] = nil
+        leave_elements[i] = nil
+      end
+
+      for i, element in ipairs(enter_elements) do
+        hovered_elements[element.node] = true
+        call_event(element, element.enter, action)
+        enter_elements[i] = nil
+      end
+
     elseif action_id == TOUCH_ACTION then
       if dragged_node and action.released then
         action.drag_end = true
