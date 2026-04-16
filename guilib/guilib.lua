@@ -66,7 +66,7 @@ guilib.create = function()
   --- Process the input request. This feature is required, nothing will work without it.
   --- Example:
   --- function on_input(self, action_id, action)
-  ---   return self.guilib.on_input(action_id, action)
+  ---   self.guilib.on_input(action_id, action)
   --- end
   ---@return boolean|nil is_catched return true if some registerd event will be called
   M.on_input = function(action_id, action)
