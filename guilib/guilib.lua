@@ -17,6 +17,7 @@ guilib.create = function()
   local dragged_node = nil
   local elements_with_touch = {}
   local elements_with_hover = {}
+  local elements_with_action = {}
   local overlap_enabled = true
   local focused_element = nil
 
@@ -46,8 +47,8 @@ guilib.create = function()
 
   --- Add element actions for node.
   --- Example: guilib.add("box", {
-  ---   touch = function(action) print("touch") end,
-  ---   release = function(action) print("release") end,
+  ---   pressed = function(action) print("pressed") end,
+  ---   released = function(action) print("released") end,
   ---   hold =  function(action) print("hold") end,
   ---   drag =  function(action) print("drag") end,
   ---   enter = function(action) print("enter") end
@@ -55,12 +56,12 @@ guilib.create = function()
   ---   hover = function(action) print("hover") end
   --- })
   ---@param name string
-  ---@param element table table with event functions
-  M.add = function(name, element)
-    element.node = gui.get_node(name)
-    if element.touch or element.release or element.drag or element.hold then table.insert(elements_with_touch, 1, element) end
-    if element.hover or element.enter or element.leave then table.insert(elements_with_hover, 1, element) end
-    return element
+  ---@param actions table table with event functions
+  M.add = function(name, actions)
+    actions.node = gui.get_node(name)
+    if actions.pressed or actions.released or actions.drag or actions.hold then table.insert(elements_with_touch, 1, actions) end
+    if actions.hover or actions.enter or actions.leave then table.insert(elements_with_hover, 1, actions) end
+    return actions
   end
 
   --- Process the input request. This feature is required, nothing will work without it.
@@ -112,7 +113,7 @@ guilib.create = function()
         if overlap_enabled and catched ~= nil then return catched end
         if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
           if action.pressed then
-            catched = call_event(element, element.touch, action)
+            catched = call_event(element, element.pressed, action)
             __focus(element, action)
             if element.drag then
               action.drag_begin = true
@@ -120,7 +121,7 @@ guilib.create = function()
               call_event(dragged_node, dragged_node.drag, action)
             end
           elseif action.released then
-            catched = call_event(element, element.release, action)
+            catched = call_event(element, element.released, action)
             dragged_node = nil
           else
             catched = call_event(element, element.hold, action)
