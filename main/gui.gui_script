@@ -73,22 +73,69 @@ local function tab1(self)
   })
 end
 
+local function zoom(scale)
+  return function(e)
+    local s = gui.get_scale(e.node)
+    s.x = s.x + s.x*scale
+    s.y = s.y + s.y*scale
+    gui.set_scale(e.node, s)
+  end
+end
+
 local function tab2(self)
   show_content(self, "tab2")
   self.guilib = guilib.create()
-  self.guilib.add("box_misc", {
-    mouse_wheel_up = function() log("up") end,
-    mouse_wheel_down = function() log("down") end
+  self.guilib.add("box_wheel", {
+    [hash('mouse_wheel_up')] = zoom(0.04),
+    [hash('mouse_wheel_down')] = zoom(-0.04),
+  })
+  self.guilib.add("box_wheel_A1", {
+    [hash('mouse_wheel_up')] = zoom(0.04),
+    [hash('mouse_wheel_down')] = zoom(-0.04),
+  })
+  self.guilib.add("box_wheel_B1", {
+    [hash('mouse_wheel_up')] = zoom(0.04),
+    [hash('mouse_wheel_down')] = zoom(-0.04),
+  })
+
+  self.guilib.add("box_input1", {
+    pressed = function() end,
+    focus = function() end,
+    [hash('text')] = function(e)
+      local t = gui.get_text(gui.get_node("input1")) .. e.text
+      gui.set_text(gui.get_node("input1"), t)
+    end,
+    [hash('key_backspace')] = function(e)
+      if e.pressed then
+        local t = gui.get_text(gui.get_node("input1"))
+        gui.set_text(gui.get_node("input1"), string.sub(t, 0, string.len(t)-1))
+      end
+    end
+  })
+  self.guilib.add("box_input2", {
+    pressed = function() end,
+    focus = function() end,
+    [hash('text')] = function(e)
+      local t = gui.get_text(gui.get_node("input2")) .. e.text
+      gui.set_text(gui.get_node("input2"), t)
+    end,
+    [hash('key_backspace')] = function(e)
+      if e.pressed then
+        local t = gui.get_text(gui.get_node("input2"))
+        gui.set_text(gui.get_node("input2"), string.sub(t, 0, string.len(t)-1))
+      end
+    end
   })
 end
 
 
 function init(self)
+  msg.post(".", "acquire_input_focus")
   self.tabs = guilib.create()
   self.guilib = guilib.create()
   self.tabs.add("button_tab1", { pressed = function() tab1(self) end })
   self.tabs.add("button_tab2", { pressed =  function() tab2(self) end })
-  tab1(self)
+  tab2(self)
 end
 
 function on_input(self, action_id, action)

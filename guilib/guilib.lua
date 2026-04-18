@@ -4,14 +4,14 @@ local TOUCH_ACTION = hash('touch')
 local call_event = function(element, method, action)
   if method then
     action.node = element.node
-    method(action, element)
+    action.element = element
+    method(action)
     return true
   end
 end
 
 ---@return GuiLib
 guilib.create = function()
-  msg.post(".", "acquire_input_focus")
   ---@class GuiLib
   local M = {}
   local dragged_node = nil
@@ -33,6 +33,9 @@ guilib.create = function()
   end
 
   local function __focus(element, action)
+    --- focus method required
+    if not element.focus then return end
+    --- skip if already focused
     if focused_element == element then return end
     if focused_element then
       __blur(action)
@@ -61,6 +64,12 @@ guilib.create = function()
     actions.node = gui.get_node(name)
     if actions.pressed or actions.released or actions.drag or actions.hold then table.insert(elements_with_touch, 1, actions) end
     if actions.hover or actions.enter or actions.leave then table.insert(elements_with_hover, 1, actions) end
+    for action_hash, _ in pairs(actions) do
+      if type(action_hash)=="userdata" then
+        if not elements_with_action[action_hash] then elements_with_action[action_hash] = {} end
+        table.insert(elements_with_action[action_hash], 1, actions)
+      end
+    end
     return actions
   end
 
@@ -126,6 +135,19 @@ guilib.create = function()
           else
             catched = call_event(element, element.hold, action)
           end
+        end
+      end
+    elseif elements_with_action[action_id] then
+      if action.x and action.y then
+        for _, element in pairs(elements_with_action[action_id]) do
+          if overlap_enabled and catched ~= nil then return catched end
+          if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
+            catched = call_event(element, element[action_id], action)
+          end
+        end
+      else
+        if focused_element then
+          catched = call_event(focused_element, focused_element[action_id], action)
         end
       end
     end
