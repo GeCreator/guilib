@@ -9,18 +9,6 @@ textures {
 }
 nodes {
   position {
-    x: 640.0
-    y: 360.0
-  }
-  type: TYPE_BOX
-  texture: "main/background"
-  id: "background"
-  adjust_mode: ADJUST_MODE_ZOOM
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
     x: 1276.0
     y: 719.0
   }
@@ -45,11 +33,6 @@ nodes {
   size {
     x: 200.0
     y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "log"
@@ -77,7 +60,6 @@ nodes {
   adjust_mode: ADJUST_MODE_ZOOM
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
   visible: false
 }
 nodes {
@@ -88,11 +70,6 @@ nodes {
   size {
     x: 200.0
     y: 20.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "Touch"
@@ -217,11 +194,6 @@ nodes {
     x: 200.0
     y: 20.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "mouse enter/leave"
   font: "default"
@@ -319,11 +291,6 @@ nodes {
     x: 200.0
     y: 20.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "Drag"
   font: "default"
@@ -365,11 +332,6 @@ nodes {
   size {
     x: 200.0
     y: 20.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "Hover"
@@ -468,11 +430,6 @@ nodes {
   size {
     x: 200.0
     y: 20.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "Focus/Blur"
@@ -632,11 +589,6 @@ nodes {
     x: 200.0
     y: 20.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "mouse wheel"
   font: "default"
@@ -779,11 +731,6 @@ nodes {
   size {
     x: 200.0
     y: 20.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "input"

@@ -1,7 +1,4 @@
 images {
-  image: "/assets/images/background.png"
-}
-images {
   image: "/assets/images/logo.png"
 }
 images {

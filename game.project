@@ -34,9 +34,9 @@ velocity_threshold = 100.0
 scale_mode = stretch
 
 [render]
-clear_color_red = 1.0
-clear_color_green = 1.0
-clear_color_blue = 1.0
+clear_color_red = 0.067
+clear_color_green = 0.204
+clear_color_blue = 0.322
 
 [library]
 include_dirs = guilib
