@@ -13,7 +13,8 @@ end
 ---@return GuiLib
 guilib.create = function()
   ---@class GuiLib
-  local M = {}
+  local M = { }
+  local enabled = true
   local dragged_node = nil
   local elements_with_touch = {}
   local elements_with_hover = {}
@@ -44,8 +45,26 @@ guilib.create = function()
     call_event(focused_element, focused_element.focus, action)
   end
 
-  M.set_overlap = function(enabled)
-    overlap_enabled = enabled
+  --- Enable/Disable guilib
+  ---@param set boolean
+  M.set_enabled = function(set)
+    enabled = set
+  end
+
+  --- Enable/Disable overlap_enabled(true by default)
+  ---@param set boolean
+  M.set_overlap = function(set)
+    overlap_enabled = set
+  end
+
+  M.test = guilib.create
+
+  --- Add instance of guilib as subprocess. 
+  --- Usable for popup/hidden elements, when required enable/disable guilib for hidden stuff
+  M.create_subprocess = function()
+    local sub = guilib.create()
+    table.insert(subprocesses, 1, sub)
+    return sub
   end
 
   --- Add element actions for node.
@@ -84,6 +103,7 @@ guilib.create = function()
   --- end
   ---@return boolean|nil is_catched return true if some registerd event will be called
   M.on_input = function(action_id, action)
+    if not enabled then return end
     local catched = nil
     if action_id == nil then
       if dragged_node then
