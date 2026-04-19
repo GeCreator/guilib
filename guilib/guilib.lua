@@ -58,10 +58,14 @@ guilib.create = function()
   ---   leave = function(action) print("leave") end
   ---   hover = function(action) print("hover") end
   --- })
-  ---@param name string
+  ---@param name_or_node string
   ---@param actions table table with event functions
-  M.add = function(name, actions)
-    actions.node = gui.get_node(name)
+  M.add = function(name_or_node, actions)
+    if type(name_or_node) == "string" then
+      actions.node = gui.get_node(name_or_node)
+    else
+      actions.node = name_or_node
+    end
     if actions.pressed or actions.released or actions.drag or actions.hold then table.insert(elements_with_touch, 1, actions) end
     if actions.hover or actions.enter or actions.leave then table.insert(elements_with_hover, 1, actions) end
     for action_hash, _ in pairs(actions) do
