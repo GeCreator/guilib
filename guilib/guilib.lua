@@ -58,8 +58,6 @@ guilib.create = function()
     overlap_enabled = set
   end
 
-  M.test = guilib.create
-
   --- Add instance of guilib as subprocess. 
   --- Usable for popup/hidden elements, when required enable/disable guilib for hidden stuff
   M.create_subprocess = function()
@@ -67,6 +65,20 @@ guilib.create = function()
     table.insert(subprocesses, 1, sub)
     return sub
   end
+
+  --- Clear GuiLib state
+  --- remove all actions and subprocesses
+  M.clear = function()
+    dragged_node = nil
+    elements_with_touch = {}
+    elements_with_hover = {}
+    elements_with_action = {}
+    focused_element = nil
+    hovered_elements = {}
+    enter_elements = {}
+    leave_elements = {}
+    subprocesses = {}
+ end
 
   --- Add element actions for node.
   --- Example: self.guilib.add("box", {
@@ -78,8 +90,10 @@ guilib.create = function()
   ---   leave = function(action) print("leave") end
   ---   hover = function(action) print("hover") end
   --- })
+  ---@generic T
   ---@param name_or_node string|node
-  ---@param actions table table with event functions
+  ---@param actions T|table table with event functions
+  ---@return T
   M.add = function(name_or_node, actions)
     if type(name_or_node) == "string" then
       actions.node = gui.get_node(name_or_node)
