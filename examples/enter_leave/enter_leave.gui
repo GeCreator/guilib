@@ -1,0 +1,138 @@
+script: "/main/gui.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "main"
+  texture: "/main/main.atlas"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "root"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_ZOOM
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: -109.0
+  }
+  size {
+    x: 200.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "mouse enter/leave"
+  font: "default"
+  id: "mouse_enter_leave"
+  parent: "root"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 105.0
+    y: 1.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 281.0
+    y: 114.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_enter_leave_A"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "A"
+  font: "default"
+  id: "text1"
+  parent: "box_enter_leave_A"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 191.0
+    y: -19.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 281.0
+    y: 114.0
+  }
+  color {
+    y: 0.8
+    z: 0.4
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_enter_leave_B"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "B"
+  font: "default"
+  id: "text7"
+  parent: "box_enter_leave_B"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

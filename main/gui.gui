@@ -21,14 +21,15 @@ nodes {
   xanchor: XANCHOR_RIGHT
   yanchor: YANCHOR_TOP
   pivot: PIVOT_NE
+  adjust_mode: ADJUST_MODE_ZOOM
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
 }
 nodes {
   position {
-    x: -21.0
-    y: -24.0
+    x: -210.0
+    y: -18.0
   }
   size {
     x: 200.0
@@ -38,788 +39,314 @@ nodes {
   text: "log"
   font: "default"
   id: "logtext"
-  pivot: PIVOT_NE
+  pivot: PIVOT_NW
   adjust_mode: ADJUST_MODE_STRETCH
   parent: "logbox"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: 3.0
-    y: 718.0
+    y: -50.0
   }
-  size {
-    x: 200.0
-    y: 100.0
+  type: TYPE_TEMPLATE
+  id: "Touch"
+  inherit_alpha: true
+  template: "/examples/touch/touch.gui"
+  enabled: false
+}
+nodes {
+  position {
+    x: 603.0
+    y: 380.0
   }
   type: TYPE_BOX
-  id: "tab1"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_ZOOM
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
+  id: "Touch/root"
+  parent: "Touch"
+  overridden_fields: 1
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 109.0
-    y: -88.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "Touch"
-  font: "default"
-  id: "touch"
-  parent: "tab1"
-  inherit_alpha: true
+  id: "Touch/touch_text"
+  parent: "Touch/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 323.0
-    y: -88.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_touch"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Touch/box_touch"
+  parent: "Touch/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 459.0
-    y: -88.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_touch_A"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Touch/box_touch_A"
+  parent: "Touch/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "A"
-  font: "default"
-  id: "text4"
-  parent: "box_touch_A"
-  inherit_alpha: true
+  id: "Touch/text4"
+  parent: "Touch/box_touch_A"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 527.0
-    y: -107.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    y: 0.8
-    z: 0.4
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_touch_B"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Touch/box_touch_B"
+  parent: "Touch/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "B"
-  font: "default"
-  id: "text5"
-  parent: "box_touch_B"
-  inherit_alpha: true
+  id: "Touch/text5"
+  parent: "Touch/box_touch_B"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 109.0
-    y: -174.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "mouse enter/leave"
-  font: "default"
-  id: "mouse_enter_leave"
-  parent: "tab1"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 323.0
-    y: -173.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_enter_leave_A"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Touch/box"
+  parent: "Touch/root"
+  template_node_child: true
 }
 nodes {
   position {
-    x: -2.0
+    x: 526.0
+    y: 382.0
   }
-  size {
-    x: 20.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "A"
-  font: "default"
-  id: "text1"
-  parent: "box_enter_leave_A"
+  type: TYPE_TEMPLATE
+  id: "Hover"
   inherit_alpha: true
+  template: "/examples/hover/hover.gui"
+  enabled: false
 }
 nodes {
-  position {
-    x: 390.0
-    y: -193.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    y: 0.8
-    z: 0.4
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_enter_leave_B"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Hover/root"
+  parent: "Hover"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "B"
-  font: "default"
-  id: "text7"
-  parent: "box_enter_leave_B"
-  inherit_alpha: true
+  id: "Hover/hover_text"
+  parent: "Hover/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 109.0
-    y: -254.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "Drag"
-  font: "default"
-  id: "drag"
-  parent: "tab1"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 323.0
-    y: -258.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_drag"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Hover/box_hover_A"
+  parent: "Hover/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 109.0
-    y: -336.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "Hover"
-  font: "default"
-  id: "hover"
-  parent: "tab1"
-  inherit_alpha: true
+  id: "Hover/text3"
+  parent: "Hover/box_hover_A"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 323.0
-    y: -340.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_hover_A"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Hover/box_hover_B"
+  parent: "Hover/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "A"
-  font: "default"
-  id: "text3"
-  parent: "box_hover_A"
-  inherit_alpha: true
+  id: "Hover/text6"
+  parent: "Hover/box_hover_B"
+  template_node_child: true
 }
 nodes {
   position {
-    x: 390.0
-    y: -360.0
+    x: 635.0
+    y: 389.0
   }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    y: 0.8
-    z: 0.4
-  }
+  type: TYPE_TEMPLATE
+  id: "Drag"
+  inherit_alpha: true
+  template: "/examples/drag/drag.gui"
+  enabled: false
+}
+nodes {
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_hover_B"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Drag/root"
+  parent: "Drag"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "B\n"
-  ""
-  font: "default"
-  id: "text6"
-  parent: "box_hover_B"
-  inherit_alpha: true
+  id: "Drag/drag_text"
+  parent: "Drag/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 109.0
-    y: -453.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "Focus/Blur"
-  font: "default"
-  id: "focus/blur"
-  parent: "tab1"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 293.0
-    y: -454.0
-  }
-  size {
-    x: 50.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_focus_A"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Drag/box_drag"
+  parent: "Drag/root"
+  template_node_child: true
 }
 nodes {
   position {
-    x: -2.0
+    x: 577.0
+    y: 352.0
   }
-  size {
-    x: 20.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "A"
-  font: "default"
-  id: "text"
-  parent: "box_focus_A"
+  type: TYPE_TEMPLATE
+  id: "Wheel"
   inherit_alpha: true
+  template: "/examples/wheel/wheel.gui"
+  enabled: false
 }
 nodes {
-  position {
-    x: 344.0
-    y: -454.0
-  }
-  size {
-    x: 50.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_focus_B"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Wheel/root"
+  parent: "Wheel"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "B"
-  font: "default"
-  id: "text2"
-  parent: "box_focus_B"
-  inherit_alpha: true
+  id: "Wheel/wheel_text"
+  parent: "Wheel/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 396.0
-    y: -454.0
-  }
-  size {
-    x: 50.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_focus_C"
-  parent: "tab1"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Wheel/box_wheel"
+  parent: "Wheel/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "C"
-  font: "default"
-  id: "text8"
-  parent: "box_focus_C"
-  inherit_alpha: true
+  id: "Wheel/text9"
+  parent: "Wheel/box_wheel"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 2.0
-    y: 720.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
   type: TYPE_BOX
-  id: "tab2"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_ZOOM
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
+  id: "Wheel/box_wheel_A1"
+  parent: "Wheel/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 131.0
-    y: -167.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "mouse wheel"
-  font: "default"
-  id: "wheel"
-  parent: "tab2"
-  inherit_alpha: true
+  id: "Wheel/text12"
+  parent: "Wheel/box_wheel_A1"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 337.0
-    y: -165.0
-  }
-  size {
-    x: 119.0
-    y: 50.0
-  }
-  color {
-    x: 0.7019608
-    y: 0.8
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_wheel"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  parent: "tab2"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Wheel/box_wheel_B1"
+  parent: "Wheel/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "wheel"
-  font: "default"
-  id: "text9"
-  parent: "box_wheel"
-  inherit_alpha: true
+  id: "Wheel/text13"
+  parent: "Wheel/box_wheel_B1"
+  template_node_child: true
 }
 nodes {
   position {
-    x: 410.0
-    y: -189.0
+    x: 596.0
+    y: 356.0
   }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
+  type: TYPE_TEMPLATE
+  id: "Enter/Leave"
+  inherit_alpha: true
+  template: "/examples/enter_leave/enter_leave.gui"
+  enabled: false
+}
+nodes {
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_wheel_A1"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  parent: "tab2"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Enter/Leave/root"
+  parent: "Enter/Leave"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "wheel"
-  font: "default"
-  id: "text12"
-  parent: "box_wheel_A1"
-  inherit_alpha: true
+  id: "Enter/Leave/mouse_enter_leave"
+  parent: "Enter/Leave/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 478.0
-    y: -208.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  color {
-    y: 0.8
-    z: 0.4
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_wheel_B1"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  parent: "tab2"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Enter/Leave/box_enter_leave_A"
+  parent: "Enter/Leave/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  text: "wheel"
-  font: "default"
-  id: "text13"
-  parent: "box_wheel_B1"
-  inherit_alpha: true
+  id: "Enter/Leave/text1"
+  parent: "Enter/Leave/box_enter_leave_A"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 131.0
-    y: -324.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "input"
-  font: "default"
-  id: "input_text"
-  parent: "tab2"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 337.0
-    y: -326.0
-  }
-  size {
-    x: 119.0
-    y: 50.0
-  }
-  color {
-    x: 0.7019608
-    y: 0.8
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_input1"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  parent: "tab2"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Enter/Leave/box_enter_leave_B"
+  parent: "Enter/Leave/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  font: "default"
-  id: "input1"
-  parent: "box_input1"
-  inherit_alpha: true
+  id: "Enter/Leave/text7"
+  parent: "Enter/Leave/box_enter_leave_B"
+  template_node_child: true
 }
 nodes {
   position {
-    x: 519.0
-    y: -326.0
+    x: 567.0
+    y: 354.0
   }
-  size {
-    x: 119.0
-    y: 50.0
-  }
-  color {
-    x: 0.7019608
-    y: 0.8
-  }
+  type: TYPE_TEMPLATE
+  id: "Focus"
+  inherit_alpha: true
+  template: "/examples/focus/focus.gui"
+  enabled: false
+}
+nodes {
   type: TYPE_BOX
-  texture: "main/button"
-  id: "box_input2"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  parent: "tab2"
-  inherit_alpha: true
-  slice9 {
-    x: 16.0
-    y: 16.0
-    z: 16.0
-    w: 16.0
-  }
+  id: "Focus/root"
+  parent: "Focus"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: -2.0
-  }
-  size {
-    x: 20.0
-    y: 20.0
-  }
   type: TYPE_TEXT
-  font: "default"
-  id: "input2"
-  parent: "box_input2"
-  inherit_alpha: true
+  id: "Focus/focus/blur"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Focus/box_focus_A"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Focus/text"
+  parent: "Focus/box_focus_A"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Focus/box_focus_B"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Focus/text2"
+  parent: "Focus/box_focus_B"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Focus/box_focus_C"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Focus/text8"
+  parent: "Focus/box_focus_C"
+  template_node_child: true
 }
 nodes {
   position {
@@ -830,7 +357,7 @@ nodes {
     y: 100.0
   }
   type: TYPE_BOX
-  id: "tab_buttons"
+  id: "top_left"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   pivot: PIVOT_NW
@@ -841,93 +368,56 @@ nodes {
 }
 nodes {
   position {
-    x: 16.0
-    y: -22.0
+    x: 191.0
+    y: -30.0
   }
-  size {
-    x: 96.0
-    y: 23.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
+  type: TYPE_TEMPLATE
+  id: "dropdown"
+  parent: "top_left"
+  inherit_alpha: true
+  template: "/components/dropdown/dropdown.gui"
+}
+nodes {
   type: TYPE_BOX
-  texture: "main/button"
-  id: "button_tab1"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  parent: "tab_buttons"
-  inherit_alpha: true
-  slice9 {
-    x: 4.0
-    y: 4.0
-    z: 4.0
-    w: 4.0
-  }
+  id: "dropdown/root"
+  parent: "dropdown"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 41.0
-    y: -10.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "base"
-  font: "default"
-  id: "text10"
-  parent: "button_tab1"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 118.0
-    y: -22.0
-  }
-  size {
-    x: 96.0
-    y: 23.0
-  }
-  color {
-    x: 0.6
-    y: 0.8
-    z: 0.6
-  }
   type: TYPE_BOX
-  texture: "main/button"
-  id: "button_tab2"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  parent: "tab_buttons"
-  inherit_alpha: true
-  slice9 {
-    x: 4.0
-    y: 4.0
-    z: 4.0
-    w: 4.0
-  }
+  id: "dropdown/button"
+  parent: "dropdown/root"
+  template_node_child: true
 }
 nodes {
-  position {
-    x: 41.0
-    y: -10.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
+  type: TYPE_BOX
+  id: "dropdown/text_current"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
   type: TYPE_TEXT
-  text: "example"
-  font: "default"
-  id: "text11"
-  parent: "button_tab2"
-  inherit_alpha: true
+  id: "dropdown/text"
+  parent: "dropdown/text_current"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/choice_container"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/choice_box_template"
+  parent: "dropdown/choice_container"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dropdown/choice_text_template"
+  parent: "dropdown/choice_box_template"
+  template_node_child: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

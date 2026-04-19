@@ -1,6 +1,8 @@
 *.png
 *.ico
 *.icns
+*.blend
+*.blend1
 /.luarc.json
 /.editor_settings
 /.internal
