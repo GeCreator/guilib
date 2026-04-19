@@ -77,7 +77,7 @@ guilib.create = function()
   ---   leave = function(action) print("leave") end
   ---   hover = function(action) print("hover") end
   --- })
-  ---@param name_or_node string
+  ---@param name_or_node string|node
   ---@param actions table table with event functions
   M.add = function(name_or_node, actions)
     if type(name_or_node) == "string" then
