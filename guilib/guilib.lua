@@ -25,6 +25,7 @@ guilib.create = function()
   local hovered_elements = {}
   local enter_elements = {}
   local leave_elements = {}
+  local subprocesses = {}
 
   local function __blur(action)
     if focused_element then
@@ -105,6 +106,12 @@ guilib.create = function()
   M.on_input = function(action_id, action)
     if not enabled then return end
     local catched = nil
+
+    for _, process in ipairs(subprocesses) do
+      catched = process.on_input(action_id, action)
+      if not catched == nil then return catched end
+    end
+
     if action_id == nil then
       if dragged_node then
         call_event(dragged_node, dragged_node.drag, action)
