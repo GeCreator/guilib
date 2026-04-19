@@ -73,9 +73,6 @@ nodes {
     x: 0.8
   }
   type: TYPE_TEXT
-  text: "Drop down\n"
-  "\n"
-  ""
   font: "default"
   id: "text"
   xanchor: XANCHOR_LEFT

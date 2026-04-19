@@ -2,6 +2,8 @@ local PADDING = 2
 
 ---@param guilib GuiLib
 ---@param template_name string
+---
+---@return guilib_dropdown_component
 return function(guilib, template_name)
   local choices = {}
   local opened = false
@@ -10,7 +12,7 @@ return function(guilib, template_name)
   local NODE_TEXT = gui.get_node(template_name .. "/text")
   local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
   local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
-  local subgui = guilib.create_subprocess()
+  local subgui = guilib.create_subprocess(template_name)
   local on_select_function = function(selection) pprint(selection.. " selected") end
   subgui.set_enabled(opened)
 
@@ -20,7 +22,16 @@ return function(guilib, template_name)
   end
   refresh()
 
+  local function select(name)
+    gui.set_text(NODE_TEXT, name)
+    on_select_function(name)
+    opened = false
+    refresh()
+  end
+
+  ---@class guilib_dropdown_component
   local dropdown = {
+    ---@private
     pressed = function()
       opened = not opened
       refresh()
@@ -42,10 +53,7 @@ return function(guilib, template_name)
       local hover_color = vmath.vector4(base_color.x*1.1, base_color.y*1.1, base_color.z*1.1, 1.0)
       subgui.add(clone[HASH_CHOICE_BOX], {
         pressed = function()
-          gui.set_text(NODE_TEXT, name)
-          on_select_function(name)
-          opened = false
-          refresh()
+          select(name)
         end,
         enter = function(e)
           gui.set_color(clone[HASH_CHOICE_BOX], hover_color)
@@ -65,8 +73,13 @@ return function(guilib, template_name)
         refresh()
       end
     end,
+    ---@param selection string
+    set_selected = function(selection)
+      select(selection)
+    end,
+    ---@private
     focus = function() end
   }
-
-  return guilib.add(template_name .. "/root", dropdown)
+  guilib.add(template_name .. "/root", dropdown)
+  return dropdown
 end
