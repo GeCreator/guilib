@@ -69,7 +69,7 @@ guilib.create = function()
   end
 
   --- Add element actions for node.
-  --- Example: guilib.add("box", {
+  --- Example: self.guilib.add("box", {
   ---   pressed = function(action) print("pressed") end,
   ---   released = function(action) print("released") end,
   ---   hold =  function(action) print("hold") end,
