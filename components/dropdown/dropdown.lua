@@ -1,0 +1,72 @@
+local PADDING = 2
+
+---@param guilib GuiLib
+---@param template_name string
+return function(guilib, template_name)
+  local choices = {}
+  local opened = false
+  local NODE_CHOICE_BOX_TEMPLATE = gui.get_node(template_name .. "/choice_box_template")
+  local NODE_CHOICE_BOX_CONTAINER = gui.get_node(template_name .. "/choice_container")
+  local NODE_TEXT = gui.get_node(template_name .. "/text")
+  local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
+  local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
+  local subgui = guilib.create_subprocess()
+  local on_select_function = function(selection) pprint(selection.. " selected") end
+  subgui.set_enabled(opened)
+
+  local function refresh()
+    gui.set_enabled(NODE_CHOICE_BOX_CONTAINER, opened)
+    subgui.set_enabled(opened)
+  end
+  refresh()
+
+  local dropdown = {
+    pressed = function()
+      opened = not opened
+      refresh()
+    end,
+    add = function(name)
+      local clone = gui.clone_tree(NODE_CHOICE_BOX_TEMPLATE)
+      local size = gui.get_size(clone[HASH_CHOICE_BOX])
+      local position = gui.get_position(clone[HASH_CHOICE_BOX])
+      position.y = size.y * -#choices
+      gui.set_text(clone[HASH_CHOICE_TEXT], name)
+      gui.set_position(clone[HASH_CHOICE_BOX], position)
+      gui.set_enabled(clone[HASH_CHOICE_BOX], true)
+
+      table.insert(choices, name)
+      local container_size = gui.get_size(NODE_CHOICE_BOX_CONTAINER)
+      container_size.y = size.y * #choices + PADDING
+      gui.set_size(NODE_CHOICE_BOX_CONTAINER, container_size)
+      local base_color = gui.get_color(clone[HASH_CHOICE_BOX])
+      local hover_color = vmath.vector4(base_color.x*1.1, base_color.y*1.1, base_color.z*1.1, 1.0)
+      subgui.add(clone[HASH_CHOICE_BOX], {
+        pressed = function()
+          gui.set_text(NODE_TEXT, name)
+          on_select_function(name)
+          opened = false
+          refresh()
+        end,
+        enter = function(e)
+          gui.set_color(clone[HASH_CHOICE_BOX], hover_color)
+        end,
+        leave = function(e)
+          gui.set_color(clone[HASH_CHOICE_BOX], base_color)
+        end
+      })
+    end,
+    ---@param fun fun(selection: string)
+    on_select = function(fun)
+      on_select_function = fun
+    end,
+    [hash('key_esc')] = function(a)
+      if a.pressed then
+        opened = false
+        refresh()
+      end
+    end,
+    focus = function() end
+  }
+
+  return guilib.add(template_name .. "/root", dropdown)
+end
