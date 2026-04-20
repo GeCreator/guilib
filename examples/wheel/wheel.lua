@@ -1,3 +1,4 @@
+local FACTOR = 0.04
  local function zoom(scale)
   return function(e)
     local s = gui.get_scale(e.node)
@@ -9,17 +10,17 @@ end
 
 ---@param guilib GuiLib
 ---@param log fun(text: string)
-return function(guilib, log)
-  guilib.add("box_wheel", {
-    [hash('mouse_wheel_up')] = zoom(0.04),
-    [hash('mouse_wheel_down')] = zoom(-0.04),
+return function(guilib, _)
+  guilib.add("wheel1", {
+    [hash('mouse_wheel_up')] = zoom(FACTOR),
+    [hash('mouse_wheel_down')] = zoom(-FACTOR),
   })
-  guilib.add("box_wheel_A1", {
-    [hash('mouse_wheel_up')] = zoom(0.04),
-    [hash('mouse_wheel_down')] = zoom(-0.04),
+  guilib.add("wheel2", {
+    [hash('mouse_wheel_up')] = zoom(FACTOR),
+    [hash('mouse_wheel_down')] = zoom(-FACTOR),
   })
-  guilib.add("box_wheel_B1", {
-    [hash('mouse_wheel_up')] = zoom(0.04),
-    [hash('mouse_wheel_down')] = zoom(-0.04),
+  guilib.add("wheel3", {
+    [hash('mouse_wheel_up')] = zoom(FACTOR),
+    [hash('mouse_wheel_down')] = zoom(-FACTOR),
   })
 end

@@ -1,4 +1,3 @@
-script: "/main/gui.gui_script"
 fonts {
   name: "default"
   font: "/builtins/fonts/default.font"
@@ -33,7 +32,7 @@ nodes {
   type: TYPE_TEXT
   text: "mouse wheel"
   font: "default"
-  id: "wheel_text"
+  id: "text"
   parent: "root"
   inherit_alpha: true
 }
@@ -56,7 +55,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button0"
-  id: "box_wheel"
+  id: "wheel1"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   parent: "root"
@@ -80,7 +79,7 @@ nodes {
   text: "wheel"
   font: "default"
   id: "text9"
-  parent: "box_wheel"
+  parent: "wheel1"
   inherit_alpha: true
 }
 nodes {
@@ -103,7 +102,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button0"
-  id: "box_wheel_A1"
+  id: "wheel2"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   parent: "root"
@@ -127,7 +126,7 @@ nodes {
   text: "wheel"
   font: "default"
   id: "text12"
-  parent: "box_wheel_A1"
+  parent: "wheel2"
   inherit_alpha: true
 }
 nodes {
@@ -149,7 +148,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "main/button0"
-  id: "box_wheel_B1"
+  id: "wheel3"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   parent: "root"
@@ -173,7 +172,7 @@ nodes {
   text: "wheel"
   font: "default"
   id: "text13"
-  parent: "box_wheel_B1"
+  parent: "wheel3"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

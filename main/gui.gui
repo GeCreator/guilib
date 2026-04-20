@@ -202,44 +202,44 @@ nodes {
 }
 nodes {
   type: TYPE_TEXT
-  id: "Wheel/wheel_text"
+  id: "Wheel/text"
   parent: "Wheel/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Wheel/box_wheel"
+  id: "Wheel/wheel1"
   parent: "Wheel/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "Wheel/text9"
-  parent: "Wheel/box_wheel"
+  parent: "Wheel/wheel1"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Wheel/box_wheel_A1"
+  id: "Wheel/wheel2"
   parent: "Wheel/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "Wheel/text12"
-  parent: "Wheel/box_wheel_A1"
+  parent: "Wheel/wheel2"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Wheel/box_wheel_B1"
+  id: "Wheel/wheel3"
   parent: "Wheel/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "Wheel/text13"
-  parent: "Wheel/box_wheel_B1"
+  parent: "Wheel/wheel3"
   template_node_child: true
 }
 nodes {
