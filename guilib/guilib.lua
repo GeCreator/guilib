@@ -16,7 +16,7 @@ end
 ---@return GuiLib
 guilib.create = function()
   ---@class GuiLib
-  local M = { }
+  local M = {}
   local enabled = true
   local dragged_node = nil
   local elements_with_touch = {}
@@ -70,7 +70,7 @@ guilib.create = function()
     overlap_enabled = set
   end
 
-  --- Add instance of guilib as subprocess. 
+  --- Add instance of guilib as subprocess.
   --- Usable for popup/hidden elements, when required enable/disable guilib for hidden stuff
   M.create_subprocess = function()
     local sub = guilib.create()
@@ -91,7 +91,7 @@ guilib.create = function()
     leave_elements = {}
     subprocesses = {}
     namespace = ""
- end
+  end
 
   --- Add element actions for node.
   --- Example: self.guilib.add("box", {
@@ -113,10 +113,11 @@ guilib.create = function()
     else
       actions.node = name_or_node
     end
-    if actions.pressed or actions.released or actions.drag or actions.hold then table.insert(elements_with_touch, 1, actions) end
+    if actions.pressed or actions.released or actions.drag or actions.hold or actions.click_outside then table.insert(elements_with_touch, 1,
+        actions) end
     if actions.hover or actions.enter or actions.leave then table.insert(elements_with_hover, 1, actions) end
     for action_hash, _ in pairs(actions) do
-      if type(action_hash)=="userdata" then
+      if type(action_hash) == "userdata" then
         if not elements_with_action[action_hash] then elements_with_action[action_hash] = {} end
         table.insert(elements_with_action[action_hash], 1, actions)
       end
@@ -169,12 +170,17 @@ guilib.create = function()
         call_event(element, element.enter, action)
         enter_elements[i] = nil
       end
-
     elseif action_id == TOUCH_ACTION then
       if dragged_node and action.released then
         action.drag_end = true
         call_event(dragged_node, dragged_node.drag, action)
         dragged_node = nil
+      end
+      if focused_element and action.pressed and focused_element.click_outside then
+        if gui.is_enabled(focused_element.node, true) and not gui.pick_node(focused_element.node, action.x, action.y) then
+          call_event(focused_element, focused_element.click_outside, action)
+          __blur(action)
+        end
       end
       for _, element in ipairs(elements_with_touch) do
         if overlap_enabled and catched ~= nil then return catched end
