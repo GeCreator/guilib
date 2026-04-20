@@ -12,7 +12,7 @@ return function(guilib, template_name)
   local NODE_TEXT = gui.get_node(template_name .. "/text")
   local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
   local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
-  local subgui = guilib.create_subprocess(template_name)
+  local subgui = guilib.create_subprocess()
   local on_select_function = function(selection) pprint(selection.. " selected") end
   subgui.set_enabled(opened)
 
@@ -31,6 +31,11 @@ return function(guilib, template_name)
 
   ---@class guilib_dropdown_component
   local dropdown = {
+    click_outside = function()
+      opened = false
+      refresh()
+    end,
+    focus = function() end,
     ---@private
     pressed = function()
       opened = not opened
@@ -77,8 +82,6 @@ return function(guilib, template_name)
     set_selected = function(selection)
       select(selection)
     end,
-    ---@private
-    focus = function() end
   }
   guilib.add(template_name .. "/root", dropdown)
   return dropdown

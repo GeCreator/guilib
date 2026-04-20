@@ -8,7 +8,8 @@ local examples = {
   Drag = require("examples.drag.drag"),
   Wheel = require("examples.wheel.wheel"),
   ["Enter/Leave"] = require("examples.enter_leave.enter_leave"),
-  Focus = require("examples.focus.focus")
+  Focus = require("examples.focus.focus"),
+  ["Click Outside"] = require("examples.click_outside.click_outside")
 }
 
 local log_text_list = {}
@@ -32,7 +33,13 @@ function init(self)
   self.guilib_showcase = self.guilib.create_subprocess()
   local dropdown = dropdown_component(self.guilib, "dropdown")
 
-  for k, v in pairs(examples) do dropdown.add(k) end
+  dropdown.add("Touch")
+  dropdown.add("Hover")
+  dropdown.add("Drag")
+  dropdown.add("Wheel")
+  dropdown.add("Enter/Leave")
+  dropdown.add("Focus")
+  dropdown.add("Click Outside")
 
   dropdown.on_select(function(selection)
     if current_example then gui.set_enabled(current_example, false) end
@@ -43,7 +50,7 @@ function init(self)
     examples[selection](self.guilib_showcase, log)
   end)
 
-  dropdown.set_selected("Wheel")
+  dropdown.set_selected("Click Outside")
 end
 
 function on_input(self, action_id, action)

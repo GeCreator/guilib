@@ -419,5 +419,46 @@ nodes {
   parent: "dropdown/choice_box_template"
   template_node_child: true
 }
+nodes {
+  position {
+    x: 631.0
+    y: 361.0
+  }
+  type: TYPE_TEMPLATE
+  id: "Click Outside"
+  inherit_alpha: true
+  template: "/examples/click_outside/click_outside.gui"
+  enabled: false
+}
+nodes {
+  type: TYPE_BOX
+  id: "Click Outside/root"
+  parent: "Click Outside"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Click Outside/A"
+  parent: "Click Outside/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Click Outside/text4"
+  parent: "Click Outside/A"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Click Outside/B"
+  parent: "Click Outside/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Click Outside/text5"
+  parent: "Click Outside/B"
+  template_node_child: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
