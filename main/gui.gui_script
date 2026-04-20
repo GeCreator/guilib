@@ -39,6 +39,7 @@ function init(self)
     current_example = gui.get_node(selection .. '/root')
     gui.set_enabled(current_example, true)
     self.guilib_showcase.clear()
+    self.guilib_showcase.set_namespace(selection)
     examples[selection](self.guilib_showcase, log)
   end)
 

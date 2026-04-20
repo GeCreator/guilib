@@ -10,6 +10,9 @@ local call_event = function(element, method, action)
   end
 end
 
+
+
+---@param namespace string|nil
 ---@return GuiLib
 guilib.create = function()
   ---@class GuiLib
@@ -26,6 +29,7 @@ guilib.create = function()
   local enter_elements = {}
   local leave_elements = {}
   local subprocesses = {}
+  local namespace = ""
 
   local function __blur(action)
     if focused_element then
@@ -44,6 +48,14 @@ guilib.create = function()
     end
     focused_element = element
     call_event(focused_element, focused_element.focus, action)
+  end
+
+  M.set_namespace = function(set)
+    if namespace then
+      namespace = set .. "/"
+    else
+      namespace = ""
+    end
   end
 
   --- Enable/Disable guilib
@@ -78,6 +90,7 @@ guilib.create = function()
     enter_elements = {}
     leave_elements = {}
     subprocesses = {}
+    namespace = ""
  end
 
   --- Add element actions for node.
@@ -96,7 +109,7 @@ guilib.create = function()
   ---@return T
   M.add = function(name_or_node, actions)
     if type(name_or_node) == "string" then
-      actions.node = gui.get_node(name_or_node)
+      actions.node = gui.get_node(namespace .. name_or_node)
     else
       actions.node = name_or_node
     end
