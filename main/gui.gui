@@ -102,12 +102,6 @@ nodes {
   template_node_child: true
 }
 nodes {
-  type: TYPE_BOX
-  id: "Touch/box"
-  parent: "Touch/root"
-  template_node_child: true
-}
-nodes {
   position {
     x: 526.0
     y: 382.0
@@ -179,7 +173,19 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "Drag/box_drag"
+  id: "Drag/box1"
+  parent: "Drag/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Drag/box2"
+  parent: "Drag/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Drag/box3"
   parent: "Drag/root"
   template_node_child: true
 }
@@ -267,26 +273,26 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "Enter/Leave/box_enter_leave_A"
+  id: "Enter/Leave/box_A"
   parent: "Enter/Leave/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "Enter/Leave/text1"
-  parent: "Enter/Leave/box_enter_leave_A"
+  parent: "Enter/Leave/box_A"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Enter/Leave/box_enter_leave_B"
+  id: "Enter/Leave/box_B"
   parent: "Enter/Leave/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
   id: "Enter/Leave/text7"
-  parent: "Enter/Leave/box_enter_leave_B"
+  parent: "Enter/Leave/box_B"
   template_node_child: true
 }
 nodes {

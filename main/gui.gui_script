@@ -22,8 +22,12 @@ local function log(text)
   if #log_text_list>30 then
     log_text_list[#log_text_list] = nil
   end
-  local lognode = gui.get_node("logtext")
-  gui.set_text(lognode, table.concat(log_text_list, "\n"))
+  gui.set_text(gui.get_node("logtext"), table.concat(log_text_list, "\n"))
+end
+
+local function log_clear()
+  gui.set_text(gui.get_node("logtext"), "")
+  log_text_list = {}
 end
 
 
@@ -48,9 +52,10 @@ function init(self)
     self.guilib_showcase.clear()
     self.guilib_showcase.set_namespace(selection)
     examples[selection](self.guilib_showcase, log)
+    log_clear()
   end)
 
-  dropdown.set_selected("Click Outside")
+  dropdown.set_selected("Drag")
 end
 
 function on_input(self, action_id, action)

@@ -164,30 +164,5 @@ nodes {
   parent: "box_touch_B"
   inherit_alpha: true
 }
-nodes {
-  position {
-    x: 184.0
-    y: 218.0
-  }
-  scale {
-    x: 0.5
-    y: 0.5
-  }
-  size {
-    x: 98.0
-    y: 171.0
-  }
-  type: TYPE_BOX
-  texture: "main/border"
-  id: "box"
-  parent: "root"
-  inherit_alpha: true
-  slice9 {
-    x: 88.0
-    y: 25.0
-    z: 12.0
-    w: 12.0
-  }
-}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
