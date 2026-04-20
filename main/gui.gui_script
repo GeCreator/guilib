@@ -43,7 +43,7 @@ function init(self)
     examples[selection](self.guilib_showcase, log)
   end)
 
-  dropdown.set_selected("Touch")
+  dropdown.set_selected("Wheel")
 end
 
 function on_input(self, action_id, action)
