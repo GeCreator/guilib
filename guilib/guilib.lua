@@ -10,9 +10,6 @@ local call_event = function(element, method, action)
   end
 end
 
-
-
----@param namespace string|nil
 ---@return GuiLib
 guilib.create = function()
   ---@class GuiLib
