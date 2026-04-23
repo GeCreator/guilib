@@ -24,6 +24,7 @@ return function()
     local elements_with_action = {}
     local overlap_enabled = true
     local focused_element = nil
+    local pressed_element = nil
 
     local hovered_elements = {}
     local enter_elements = {}
@@ -85,7 +86,7 @@ return function()
       elements_with_hover = {}
       elements_with_action = {}
       focused_element = nil
-      pressed_actions = {}
+      pressed_element = nil
       hovered_elements = {}
       enter_elements = {}
       leave_elements = {}
@@ -149,7 +150,7 @@ return function()
         pressed_actions[action_id] = nil
       end
 
-      if action_id == nil then
+      if action_id == nil and action.x and action.y then
         if dragged_node then
           call_event(dragged_node, dragged_node.drag, action)
         end
@@ -191,22 +192,28 @@ return function()
             __blur(action)
           end
         end
+        -- call released even if not pick to node
+        if pressed_element then
+          action.is_picked = gui.pick_node(pressed_element.node, action.x, action.y)
+          if action.released then
+            catched = call_event(pressed_element, pressed_element.released, action)
+            pressed_element = nil
+          elseif action.pressed==false then
+            catched = call_event(pressed_element, pressed_element.hold, action)
+          end
+        end
         for _, element in ipairs(elements_with_touch) do
           if overlap_enabled and catched ~= nil then return catched end
           if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
             if action.pressed then
               catched = call_event(element, element.pressed, action)
+              pressed_element = element
               __focus(element, action)
               if element.drag then
                 action.drag_begin = true
                 dragged_node = element
                 call_event(dragged_node, dragged_node.drag, action)
               end
-            elseif action.released then
-              catched = call_event(element, element.released, action)
-              dragged_node = nil
-            else
-              catched = call_event(element, element.hold, action)
             end
           end
         end
