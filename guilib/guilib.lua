@@ -8,7 +8,7 @@ return function()
     if method then
       action.node = element.node
       action.element = element
-      action.active_actions = pressed_actions
+      action.pressed_actions = pressed_actions
       method(action)
       return true
     end
