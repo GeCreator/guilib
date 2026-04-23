@@ -1,10 +1,12 @@
 local guilib = {}
 local TOUCH_ACTION = hash('touch')
+local pressed_actions = {}
 
 local call_event = function(element, method, action)
   if method then
     action.node = element.node
     action.element = element
+    action.active_actions = pressed_actions
     method(action)
     return true
   end
@@ -83,6 +85,7 @@ guilib.create = function()
     elements_with_hover = {}
     elements_with_action = {}
     focused_element = nil
+    pressed_actions = {}
     hovered_elements = {}
     enter_elements = {}
     leave_elements = {}
@@ -210,6 +213,13 @@ guilib.create = function()
         if focused_element then
           catched = call_event(focused_element, focused_element[action_id], action)
         end
+      end
+    else
+      --- store active(pressed) actions in global storage
+      if action.pressed then
+        pressed_actions[action_id] = true
+      elseif action.released then
+        pressed_actions[action_id] = nil
       end
     end
     return catched
