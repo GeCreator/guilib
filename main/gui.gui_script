@@ -33,7 +33,7 @@ end
 
 function init(self)
   msg.post(".", "acquire_input_focus")
-  self.guilib = guilib.create()
+  self.guilib = guilib()
   self.guilib_showcase = self.guilib.create_subprocess()
   local dropdown = dropdown_component(self.guilib, "dropdown")
 
