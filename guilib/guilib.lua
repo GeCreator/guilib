@@ -142,6 +142,13 @@ return function()
         if not catched == nil then return catched end
       end
 
+      --- store active(pressed) actions in global storage
+      if action.pressed then
+        pressed_actions[action_id] = true
+      elseif action.released then
+        pressed_actions[action_id] = nil
+      end
+
       if action_id == nil then
         if dragged_node then
           call_event(dragged_node, dragged_node.drag, action)
@@ -203,7 +210,9 @@ return function()
             end
           end
         end
-      elseif elements_with_action[action_id] then
+      end
+
+      if elements_with_action[action_id] then
         if action.x and action.y then
           for _, element in pairs(elements_with_action[action_id]) do
             if overlap_enabled and catched ~= nil then return catched end
@@ -215,13 +224,6 @@ return function()
           if focused_element then
             catched = call_event(focused_element, focused_element[action_id], action)
           end
-        end
-      else
-        --- store active(pressed) actions in global storage
-        if action.pressed then
-          pressed_actions[action_id] = true
-        elseif action.released then
-          pressed_actions[action_id] = nil
         end
       end
       return catched
