@@ -2,6 +2,7 @@ return function()
   local guilib = {}
   local TOUCH_ACTION = hash('touch')
   local pressed_actions = {}
+  local dragged_node = nil
 
   local call_event = function(element, method, action)
     if method then
@@ -18,7 +19,6 @@ return function()
     ---@class GuiLib
     local M = {}
     local enabled = true
-    local dragged_node = nil
     local elements_with_touch = {}
     local elements_with_hover = {}
     local elements_with_action = {}
@@ -81,7 +81,6 @@ return function()
     --- Clear GuiLib state
     --- remove all actions and subprocesses
     M.clear = function()
-      dragged_node = nil
       elements_with_touch = {}
       elements_with_hover = {}
       elements_with_action = {}
