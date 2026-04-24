@@ -2,7 +2,6 @@ return function()
   local guilib = {}
   local TOUCH_ACTION = hash('touch')
   local pressed_actions = {}
-  local dragged_node = nil
 
   local call_event = function(element, method, action)
     if method then
@@ -99,7 +98,6 @@ return function()
     ---   pressed = function(action) print("pressed") end,
     ---   released = function(action) print("released") end,
     ---   hold =  function(action) print("hold") end,
-    ---   drag =  function(action) print("drag") end,
     ---   enter = function(action) print("enter") end
     ---   leave = function(action) print("leave") end
     ---   hover = function(action) print("hover") end
@@ -114,7 +112,7 @@ return function()
       else
         actions.node = name_or_node
       end
-      if actions.pressed or actions.released or actions.drag or actions.hold or actions.click_outside then
+      if actions.pressed or actions.released or actions.hold or actions.click_outside then
         table.insert(elements_with_touch, 1,
           actions)
       end
@@ -151,10 +149,6 @@ return function()
       end
 
       if action_id == nil and action.x and action.y then
-        if dragged_node then
-          call_event(dragged_node, dragged_node.drag, action)
-        end
-
         for _, element in ipairs(elements_with_hover) do
           if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
             if not hovered_elements[element.node] then
@@ -181,11 +175,6 @@ return function()
           enter_elements[i] = nil
         end
       elseif action_id == TOUCH_ACTION then
-        if dragged_node and action.released then
-          action.drag_end = true
-          call_event(dragged_node, dragged_node.drag, action)
-          dragged_node = nil
-        end
         if focused_element and action.pressed and focused_element.click_outside then
           if gui.is_enabled(focused_element.node, true) and not gui.pick_node(focused_element.node, action.x, action.y) then
             call_event(focused_element, focused_element.click_outside, action)
@@ -209,11 +198,6 @@ return function()
               catched = call_event(element, element.pressed, action)
               pressed_element = element
               __focus(element, action)
-              if element.drag then
-                action.drag_begin = true
-                dragged_node = element
-                call_event(dragged_node, dragged_node.drag, action)
-              end
             end
           end
         end
