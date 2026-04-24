@@ -3,7 +3,7 @@ local dropdown_component = require "components.dropdown.dropdown"
 
 
 local examples = {
-  Touch = require("examples.touch.touch"),
+  ["Pressed/Hold/Released"] = require("examples.pressed_hold_released.pressed_hold_released"),
   Hover = require("examples.hover.hover"),
   Drag = require("examples.drag.drag"),
   Wheel = require("examples.wheel.wheel"),
@@ -37,7 +37,7 @@ function init(self)
   self.guilib_showcase = self.guilib.create_subprocess()
   local dropdown = dropdown_component(self.guilib, "dropdown")
 
-  dropdown.add("Touch")
+  dropdown.add("Pressed/Hold/Released")
   dropdown.add("Hover")
   dropdown.add("Drag")
   dropdown.add("Wheel")

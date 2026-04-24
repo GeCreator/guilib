@@ -49,9 +49,9 @@ nodes {
     y: -50.0
   }
   type: TYPE_TEMPLATE
-  id: "Touch"
+  id: "Pressed/Hold/Released"
   inherit_alpha: true
-  template: "/examples/touch/touch.gui"
+  template: "/examples/pressed_hold_released/pressed_hold_released.gui"
   enabled: false
 }
 nodes {
@@ -60,45 +60,45 @@ nodes {
     y: 380.0
   }
   type: TYPE_BOX
-  id: "Touch/root"
-  parent: "Touch"
+  id: "Pressed/Hold/Released/root"
+  parent: "Pressed/Hold/Released"
   overridden_fields: 1
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
-  id: "Touch/touch_text"
-  parent: "Touch/root"
+  id: "Pressed/Hold/Released/touch_text"
+  parent: "Pressed/Hold/Released/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Touch/box_touch"
-  parent: "Touch/root"
+  id: "Pressed/Hold/Released/box_touch"
+  parent: "Pressed/Hold/Released/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Touch/box_touch_A"
-  parent: "Touch/root"
+  id: "Pressed/Hold/Released/box_touch_A"
+  parent: "Pressed/Hold/Released/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
-  id: "Touch/text4"
-  parent: "Touch/box_touch_A"
+  id: "Pressed/Hold/Released/text4"
+  parent: "Pressed/Hold/Released/box_touch_A"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Touch/box_touch_B"
-  parent: "Touch/root"
+  id: "Pressed/Hold/Released/box_touch_B"
+  parent: "Pressed/Hold/Released/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
-  id: "Touch/text5"
-  parent: "Touch/box_touch_B"
+  id: "Pressed/Hold/Released/text5"
+  parent: "Pressed/Hold/Released/box_touch_B"
   template_node_child: true
 }
 nodes {
