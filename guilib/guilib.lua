@@ -112,10 +112,6 @@ return function()
       end
     end
 
-    M.dump = function()
-      -- pprint(elements_with_touch, RESERVED_ACTIONS.pressed)
-    end
-
     --- Enable/Disable guilib
     ---@param set boolean
     M.set_enabled = function(set)

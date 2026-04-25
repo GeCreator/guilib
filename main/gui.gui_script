@@ -9,7 +9,8 @@ local examples = {
   Wheel = require("examples.wheel.wheel"),
   ["Enter/Leave"] = require("examples.enter_leave.enter_leave"),
   Focus = require("examples.focus.focus"),
-  ["Click Outside"] = require("examples.click_outside.click_outside")
+  ["Click Outside"] = require("examples.click_outside.click_outside"),
+  Slider = require("examples.slider.slider")
 }
 
 local log_text_list = {}
@@ -31,6 +32,17 @@ local function log_clear()
 end
 
 
+local function open_example(self, name)
+  if current_example then gui.set_enabled(current_example, false) end
+  current_example = gui.get_node(name .. '/root')
+  gui.set_enabled(current_example, true)
+  self.guilib_showcase.clear()
+  self.guilib_showcase.set_namespace(name)
+  examples[name](self.guilib_showcase, log)
+  log_clear()
+
+end
+
 function init(self)
   msg.post(".", "acquire_input_focus")
   self.guilib = guilib()
@@ -44,18 +56,12 @@ function init(self)
   dropdown.add("Enter/Leave")
   dropdown.add("Focus")
   dropdown.add("Click Outside")
+  dropdown.add("Slider")
 
-  dropdown.on_select(function(selection)
-    if current_example then gui.set_enabled(current_example, false) end
-    current_example = gui.get_node(selection .. '/root')
-    gui.set_enabled(current_example, true)
-    self.guilib_showcase.clear()
-    self.guilib_showcase.set_namespace(selection)
-    examples[selection](self.guilib_showcase, log)
-    log_clear()
-  end)
-
-  dropdown.set_selected("Drag")
+  dropdown.on_select(function(selection) open_example(self, selection) end)
+  dropdown.set_selected("Pressed/Hold/Released")
+  --
+  -- open_example(self, "Slider")
 end
 
 function on_input(self, action_id, action)
