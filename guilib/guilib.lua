@@ -1,3 +1,20 @@
+local function clear_table(t)
+  for k, v in pairs(t) do t[k] = nil end
+end
+
+local RESERVED_ACTIONS_TOUCH = {
+  pressed = true,
+  released = true,
+  hold = true,
+  click_outside = true,
+}
+
+local RESERVED_ACTIONS_HOVER = {
+  hover = true,
+  enter = true,
+  leave = true,
+}
+
 return function()
   local guilib = {}
   local TOUCH_ACTION = hash('touch')
@@ -18,6 +35,7 @@ return function()
     ---@class GuiLib
     local M = {}
     local enabled = true
+    local elements = {}
     local elements_with_touch = {}
     local elements_with_hover = {}
     local elements_with_action = {}
@@ -30,6 +48,36 @@ return function()
     local leave_elements = {}
     local subprocesses = {}
     local namespace = ""
+
+    ---@return GuiLibElement
+    local function create_guilib_element(node, actions)
+      ---@class GuiLibElement
+      local element = { node = node, __hover_element = false, __touch_element = false }
+      elements[node] = element
+      ---Bind action to node
+      ---@param action hash|string
+      ---@param handler fun(action: table)
+      element.on = function(action, handler)
+        element[action] = handler
+        if RESERVED_ACTIONS_TOUCH[action] and not element.__touch_element then
+          element.__touch_element = true
+          table.insert(elements_with_touch, 1, element)
+        elseif RESERVED_ACTIONS_HOVER[action] and not element.__hover_element then
+          element.__hover_element = true
+          table.insert(elements_with_hover, 1, element)
+        else
+          if not elements_with_action[action] then elements_with_action[action] = {} end
+          table.insert(elements_with_action[action], 1, element)
+        end
+      end
+      --- add actions
+      if actions then
+        for action, handler in pairs(actions) do
+          element.on(action, handler)
+        end
+      end
+      return element
+    end
 
     local function __blur(action)
       if focused_element then
@@ -50,12 +98,16 @@ return function()
       call_event(focused_element, focused_element.focus, action)
     end
 
+    ---@param set string
     M.set_namespace = function(set)
-      if namespace then
-        namespace = set .. "/"
-      else
-        namespace = ""
+      namespace = set
+      if namespace ~= "" then
+        namespace = namespace .. "/"
       end
+    end
+
+    M.dump = function()
+      -- pprint(elements_with_touch, RESERVED_ACTIONS.pressed)
     end
 
     --- Enable/Disable guilib
@@ -81,15 +133,15 @@ return function()
     --- Clear GuiLib state
     --- remove all actions and subprocesses
     M.clear = function()
-      elements_with_touch = {}
-      elements_with_hover = {}
-      elements_with_action = {}
+      clear_table(elements_with_touch)
+      clear_table(elements_with_hover)
+      clear_table(elements_with_action)
+      clear_table(hovered_elements)
+      clear_table(enter_elements)
+      clear_table(leave_elements)
+      clear_table(subprocesses)
       focused_element = nil
       pressed_element = nil
-      hovered_elements = {}
-      enter_elements = {}
-      leave_elements = {}
-      subprocesses = {}
       namespace = ""
     end
 
@@ -102,28 +154,14 @@ return function()
     ---   leave = function(action) print("leave") end
     ---   hover = function(action) print("hover") end
     --- })
-    ---@generic T
     ---@param name_or_node string|node
-    ---@param actions T|table table with event functions
-    ---@return T
+    ---@param actions? table table with event functions
+    ---@return GuiLibElement
     M.add = function(name_or_node, actions)
       if type(name_or_node) == "string" then
-        actions.node = gui.get_node(namespace .. name_or_node)
-      else
-        actions.node = name_or_node
+        return create_guilib_element(gui.get_node(namespace .. name_or_node), actions)
       end
-      if actions.pressed or actions.released or actions.hold or actions.click_outside then
-        table.insert(elements_with_touch, 1,
-          actions)
-      end
-      if actions.hover or actions.enter or actions.leave then table.insert(elements_with_hover, 1, actions) end
-      for action_hash, _ in pairs(actions) do
-        if type(action_hash) == "userdata" then
-          if not elements_with_action[action_hash] then elements_with_action[action_hash] = {} end
-          table.insert(elements_with_action[action_hash], 1, actions)
-        end
-      end
-      return actions
+      return create_guilib_element(name_or_node, actions)
     end
 
     --- Process the input request. This feature is required, nothing will work without it.
@@ -187,7 +225,7 @@ return function()
           if action.released then
             catched = call_event(pressed_element, pressed_element.released, action)
             pressed_element = nil
-          elseif action.pressed==false then
+          elseif action.pressed == false then
             catched = call_event(pressed_element, pressed_element.hold, action)
           end
         end
