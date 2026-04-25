@@ -13,6 +13,7 @@ return function(guilib, log)
     end,
     hold = function() log("Hold") end,
   })
+  -- guilib.dump()
   -----------------------------------------------
   guilib.add("box_touch_A", { pressed = function() log("A Clicked") end, })
   guilib.add("box_touch_B", { pressed = function() log("B Clicked") end, })

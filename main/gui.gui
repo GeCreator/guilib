@@ -466,5 +466,46 @@ nodes {
   parent: "Click Outside/B"
   template_node_child: true
 }
+nodes {
+  position {
+    x: 603.0
+    y: 318.0
+  }
+  type: TYPE_TEMPLATE
+  id: "Slider"
+  inherit_alpha: true
+  template: "/examples/slider/slider.gui"
+  enabled: false
+}
+nodes {
+  type: TYPE_BOX
+  id: "Slider/root"
+  parent: "Slider"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "Slider/slider"
+  parent: "Slider/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Slider/slider/root"
+  parent: "Slider/slider"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Slider/slider/background"
+  parent: "Slider/slider/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Slider/slider/pin"
+  parent: "Slider/slider/background"
+  template_node_child: true
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

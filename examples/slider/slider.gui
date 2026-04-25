@@ -1,0 +1,49 @@
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "main"
+  texture: "/main/main.atlas"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "root"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "slider"
+  parent: "root"
+  inherit_alpha: true
+  template: "/components/slider/slider.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "slider/root"
+  parent: "slider"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "slider/background"
+  parent: "slider/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "slider/pin"
+  parent: "slider/background"
+  template_node_child: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
