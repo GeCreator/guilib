@@ -52,7 +52,13 @@ return function()
     ---@return GuiLibElement
     local function create_guilib_element(node, actions)
       ---@class GuiLibElement
-      local element = { node = node, __hover_element = false, __touch_element = false }
+      local element = {
+        node = node,
+        ---@private
+        __hover_element = false,
+        ---@private
+        __touch_element = false
+      }
       elements[node] = element
       ---Bind action to node
       ---@param action hash|string
