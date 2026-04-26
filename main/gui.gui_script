@@ -59,7 +59,7 @@ function init(self)
   dropdown.add("Slider")
 
   dropdown.on_select(function(selection) open_example(self, selection) end)
-  dropdown.set_selected("Pressed/Hold/Released")
+  dropdown.set_selected("Focus")
   --
   -- open_example(self, "Slider")
 end

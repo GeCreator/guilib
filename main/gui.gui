@@ -313,12 +313,6 @@ nodes {
   template_node_child: true
 }
 nodes {
-  type: TYPE_TEXT
-  id: "Focus/focus/blur"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
   type: TYPE_BOX
   id: "Focus/box_focus_A"
   parent: "Focus/root"
@@ -352,6 +346,42 @@ nodes {
   type: TYPE_TEXT
   id: "Focus/text8"
   parent: "Focus/box_focus_C"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Focus/set_focus_A"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Focus/text1"
+  parent: "Focus/set_focus_A"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Focus/set_focus_B"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Focus/text3"
+  parent: "Focus/set_focus_B"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Focus/set_focus_C"
+  parent: "Focus/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Focus/text4"
+  parent: "Focus/set_focus_C"
   template_node_child: true
 }
 nodes {

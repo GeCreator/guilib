@@ -59,7 +59,7 @@ return function()
         ---@private
         __touch_element = false
       }
-      elements[node] = element
+      elements[gui.get_id(node)] = element
       ---Bind action to node
       ---@param action hash|string
       ---@param handler fun(action: table)
@@ -135,6 +135,7 @@ return function()
     --- Clear GuiLib state
     --- remove all actions and subprocesses
     M.clear = function()
+      clear_table(elements)
       clear_table(elements_with_touch)
       clear_table(elements_with_hover)
       clear_table(elements_with_action)
@@ -259,6 +260,19 @@ return function()
       end
       return catched
     end
+
+    M.focus = function(node)
+      if type(node) == "table" then
+        __focus(node, {})
+      elseif type(node)=="string" then
+        local id = gui.get_id(gui.get_node(namespace..node))
+        __focus(elements[id] or {}, {})
+      else
+        local id = gui.get_id(node)
+        __focus(elements[id] or {}, {})
+      end
+    end
+
     return M
   end
   return guilib.init()

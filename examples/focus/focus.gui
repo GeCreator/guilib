@@ -23,22 +23,6 @@ nodes {
 }
 nodes {
   position {
-    x: -157.0
-    y: -3.0
-  }
-  size {
-    x: 200.0
-    y: 20.0
-  }
-  type: TYPE_TEXT
-  text: "Focus/Blur"
-  font: "default"
-  id: "focus/blur"
-  parent: "root"
-  inherit_alpha: true
-}
-nodes {
-  position {
     x: 27.0
     y: -4.0
   }
@@ -182,6 +166,102 @@ nodes {
   font: "default"
   id: "text8"
   parent: "box_focus_C"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 82.0
+    y: 211.0
+  }
+  size {
+    x: 100.0
+    y: 30.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.2
+    z: 0.6
+  }
+  type: TYPE_BOX
+  id: "set_focus_A"
+  parent: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 92.0
+    y: 15.0
+  }
+  type: TYPE_TEXT
+  text: "set focus A"
+  font: "default"
+  id: "text1"
+  parent: "set_focus_A"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 82.0
+    y: 176.0
+  }
+  size {
+    x: 100.0
+    y: 30.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.2
+    z: 0.6
+  }
+  type: TYPE_BOX
+  id: "set_focus_B"
+  parent: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 92.0
+    y: 15.0
+  }
+  type: TYPE_TEXT
+  text: "set focus B"
+  font: "default"
+  id: "text3"
+  parent: "set_focus_B"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 82.0
+    y: 141.0
+  }
+  size {
+    x: 100.0
+    y: 30.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.2
+    z: 0.6
+  }
+  type: TYPE_BOX
+  id: "set_focus_C"
+  parent: "root"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 92.0
+    y: 15.0
+  }
+  type: TYPE_TEXT
+  text: "set focus C"
+  font: "default"
+  id: "text4"
+  parent: "set_focus_C"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
