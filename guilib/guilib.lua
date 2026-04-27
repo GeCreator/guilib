@@ -93,6 +93,15 @@ return function()
       return element
     end
 
+    local function get_node_id(node)
+      if type(node) == "table" then
+        return gui.get_id(node.node)
+      elseif type(node)=="string" then
+        return gui.get_id(gui.get_node(namespace..node))
+      end
+      return gui.get_id(node)
+    end
+
     local function __blur(action)
       if focused_element then
         call_event(focused_element, focused_element.blur, action)
@@ -165,14 +174,11 @@ return function()
     ---   leave = function(action) print("leave") end
     ---   hover = function(action) print("hover") end
     --- })
-    ---@param name_or_node string|node
+    ---@param node string|node|hash
     ---@param actions? table table with event functions
     ---@return GuiLibElement
-    M.add = function(name_or_node, actions)
-      if type(name_or_node) == "string" then
-        return create_guilib_element(gui.get_node(namespace .. name_or_node), actions)
-      end
-      return create_guilib_element(name_or_node, actions)
+    M.add = function(node, actions)
+      return create_guilib_element(get_node_id(node), actions)
     end
 
     --- Process the input request. This feature is required, nothing will work without it.
@@ -270,15 +276,7 @@ return function()
     end
 
     M.focus = function(node)
-      if type(node) == "table" then
-        __focus(node, {})
-      elseif type(node)=="string" then
-        local id = gui.get_id(gui.get_node(namespace..node))
-        __focus(elements[id] or {}, {})
-      else
-        local id = gui.get_id(node)
-        __focus(elements[id] or {}, {})
-      end
+      __focus(elements[get_node_id(node)] or {}, {})
     end
 
     return M
