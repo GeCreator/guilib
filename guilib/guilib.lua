@@ -64,7 +64,15 @@ return function()
       ---@param action hash|string
       ---@param handler fun(action: table)
       element.on = function(action, handler)
-        element[action] = handler
+        if element[action] then
+            local previous_handler = element[action]
+          element[action] = function(e)
+            previous_handler(e)
+            handler(e)
+          end
+        else
+          element[action] = handler
+        end
         if RESERVED_ACTIONS_TOUCH[action] and not element.__touch_element then
           element.__touch_element = true
           table.insert(elements_with_touch, 1, element)
