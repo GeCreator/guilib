@@ -2,6 +2,14 @@ local function clear_table(t)
   for k, v in pairs(t) do t[k] = nil end
 end
 
+local function remove_from_list(l, value)
+  for i, v in ipairs(l) do
+    if value == v then
+      table.remove(l, i) return
+    end
+  end
+end
+
 local RESERVED_ACTIONS_TOUCH = {
   pressed = true,
   released = true,
@@ -50,16 +58,19 @@ return function()
     local namespace = ""
 
     ---@return GuiLibElement
-    local function create_guilib_element(node, actions)
+    local function create_element(node)
+
       ---@class GuiLibElement
       local element = {
+        ---@type hash
+        id = gui.get_id(node),
+        ---@type node
         node = node,
         ---@private
         __hover_element = false,
         ---@private
         __touch_element = false
       }
-      elements[gui.get_id(node)] = element
       ---Bind action to node
       ---@param action hash|string
       ---@param handler fun(action: table)
@@ -84,22 +95,27 @@ return function()
           table.insert(elements_with_action[action], 1, element)
         end
       end
-      --- add actions
-      if actions then
-        for action, handler in pairs(actions) do
-          element.on(action, handler)
-        end
-      end
-      return element
+            return element
     end
 
-    local function get_node_id(node)
-      if type(node) == "table" then
-        return gui.get_id(node.node)
-      elseif type(node)=="string" then
-        return gui.get_id(gui.get_node(namespace..node))
+    ---@param element GuiLibElement
+    local function __remove_element(element)
+      if elements[element.id] then
+        remove_from_list(elements_with_touch, element)
+        remove_from_list(elements_with_hover, element)
+        remove_from_list(elements_with_action, element)
+        remove_from_list(hovered_elements, element )
+        remove_from_list(enter_elements, element )
+        remove_from_list(leave_elements, element )
+        elements[element.id] = nil
       end
-      return gui.get_id(node)
+    end
+
+    local function __get_node(node)
+      if type(node)=="string" then
+        return gui.get_node(namespace..node)
+      end
+      return node
     end
 
     local function __blur(action)
@@ -174,11 +190,21 @@ return function()
     ---   leave = function(action) print("leave") end
     ---   hover = function(action) print("hover") end
     --- })
-    ---@param node string|node|hash
+    ---@param node string|node
     ---@param actions? table table with event functions
     ---@return GuiLibElement
     M.add = function(node, actions)
-      return create_guilib_element(get_node_id(node), actions)
+      local element = create_element(__get_node(node))
+      --- add actions
+      if actions then
+        for action, handler in pairs(actions) do
+          element.on(action, handler)
+        end
+      end
+      ---Replace already exists element
+      if elements[element.id] then __remove_element(elements[element.id]) end
+      elements[element.id] = element
+      return element
     end
 
     --- Process the input request. This feature is required, nothing will work without it.
@@ -206,13 +232,13 @@ return function()
       if action_id == nil and action.x and action.y then
         for _, element in ipairs(elements_with_hover) do
           if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
-            if not hovered_elements[element.node] then
+            if not hovered_elements[element.id] then
               table.insert(enter_elements, element)
             end
             call_event(element, element.hover, action)
             catched = true
           else
-            if hovered_elements[element.node] then
+            if hovered_elements[element.id] then
               table.insert(leave_elements, element)
             end
           end
@@ -220,12 +246,12 @@ return function()
 
         for i, element in ipairs(leave_elements) do
           call_event(element, element.leave, action)
-          hovered_elements[element.node] = nil
+          hovered_elements[element.id] = nil
           leave_elements[i] = nil
         end
 
         for i, element in ipairs(enter_elements) do
-          hovered_elements[element.node] = true
+          hovered_elements[element.id] = true
           call_event(element, element.enter, action)
           enter_elements[i] = nil
         end
@@ -275,8 +301,17 @@ return function()
       return catched
     end
 
-    M.focus = function(node)
-      __focus(elements[get_node_id(node)] or {}, {})
+    M.focus = function(node_or_element)
+      if type(node_or_element) == 'table' then
+        __focus(node_or_element, {})
+      else
+        local element = elements[gui.get_id(__get_node(node_or_element))]
+        if element then __focus(element, {}) end
+      end
+    end
+
+    M.dump = function()
+      pprint(elements_with_touch)
     end
 
     return M
