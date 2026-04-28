@@ -10,13 +10,13 @@ local function remove_from_list(l, value)
   end
 end
 
+local TOUCH_ACTION = hash('touch')
 local RESERVED_ACTIONS_TOUCH = {
   pressed = true,
   released = true,
   hold = true,
   click_outside = true,
 }
-
 local RESERVED_ACTIONS_HOVER = {
   hover = true,
   enter = true,
@@ -25,7 +25,6 @@ local RESERVED_ACTIONS_HOVER = {
 
 return function()
   local guilib = {}
-  local TOUCH_ACTION = hash('touch')
   local pressed_actions = {}
 
   local call_event = function(element, method, action)
