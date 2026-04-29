@@ -140,7 +140,10 @@ return function()
     M.set_namespace = function(set)
       namespace = set
       if namespace ~= "" then
-        namespace = namespace .. "/"
+        namespace = namespace
+        if not string.match(namespace, "(/)$") then
+          namespace = namespace .. "/"
+        end
       end
     end
 
@@ -160,6 +163,7 @@ return function()
     --- Usable for popup/hidden elements, when required enable/disable guilib for hidden stuff
     M.create_subprocess = function()
       local sub = guilib.init()
+      sub.set_namespace(namespace)
       table.insert(subprocesses, 1, sub)
       return sub
     end
