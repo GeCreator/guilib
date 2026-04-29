@@ -55,77 +55,6 @@ nodes {
 }
 nodes {
   position {
-    y: 720.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_BOX
-  id: "top_left"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_ZOOM
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
-    x: 191.0
-    y: -30.0
-  }
-  type: TYPE_TEMPLATE
-  id: "dropdown"
-  parent: "top_left"
-  inherit_alpha: true
-  template: "/components/dropdown/dropdown.gui"
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/root"
-  parent: "dropdown"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/button"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/text_current"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "dropdown/text"
-  parent: "dropdown/text_current"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/choice_container"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/choice_box_template"
-  parent: "dropdown/choice_container"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "dropdown/choice_text_template"
-  parent: "dropdown/choice_box_template"
-  template_node_child: true
-}
-nodes {
-  position {
     y: -50.0
   }
   type: TYPE_TEMPLATE
@@ -561,6 +490,77 @@ nodes {
   yanchor: YANCHOR_BOTTOM
   pivot: PIVOT_SE
   inherit_alpha: true
+}
+nodes {
+  position {
+    y: 720.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "top_left"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_ZOOM
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 191.0
+    y: -30.0
+  }
+  type: TYPE_TEMPLATE
+  id: "dropdown"
+  parent: "top_left"
+  inherit_alpha: true
+  template: "/components/dropdown/dropdown.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/root"
+  parent: "dropdown"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/button"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/text_current"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dropdown/text"
+  parent: "dropdown/text_current"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/choice_container"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/choice_box_template"
+  parent: "dropdown/choice_container"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dropdown/choice_text_template"
+  parent: "dropdown/choice_box_template"
+  template_node_child: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
