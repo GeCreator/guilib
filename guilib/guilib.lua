@@ -258,7 +258,6 @@ return function()
         if focused_element and action.pressed and focused_element.click_outside then
           if gui.is_enabled(focused_element.node, true) and not gui.pick_node(focused_element.node, action.x, action.y) then
             call_event(focused_element, focused_element.click_outside, action)
-            __blur(action)
           end
         end
         -- call released even if not pick to node
