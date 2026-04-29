@@ -94,7 +94,7 @@ return function()
           table.insert(elements_with_action[action], 1, element)
         end
       end
-            return element
+      return element
     end
 
     ---@param element GuiLibElement
@@ -288,7 +288,7 @@ return function()
 
       if elements_with_action[action_id] then
         if action.x and action.y then
-          for _, element in pairs(elements_with_action[action_id]) do
+          for _, element in ipairs(elements_with_action[action_id]) do
             if overlap_enabled and catched ~= nil then return catched end
             if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
               catched = call_event(element, element[action_id], action)
