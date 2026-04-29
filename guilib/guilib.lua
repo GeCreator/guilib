@@ -25,13 +25,13 @@ local RESERVED_ACTIONS_HOVER = {
 
 return function()
   local guilib = {}
-  local pressed_actions = {}
+  local pressed_action = {}
 
   local call_event = function(element, method, action)
     if method then
       action.node = element.node
       action.element = element
-      action.pressed_actions = pressed_actions
+      action.pressed_action = pressed_action
       method(action)
       return true
     end
@@ -218,14 +218,14 @@ return function()
 
       for _, process in ipairs(subprocesses) do
         catched = process.on_input(action_id, action)
-        if not catched == nil then return catched end
+        if catched then return catched end
       end
 
       --- store active(pressed) actions in global storage
       if action.pressed then
-        pressed_actions[action_id] = true
+        pressed_action[action_id] = true
       elseif action.released then
-        pressed_actions[action_id] = nil
+        pressed_action[action_id] = nil
       end
 
       if action_id == nil and action.x and action.y then
