@@ -32,7 +32,10 @@ return function()
       action.node = element.node
       action.element = element
       action.pressed_action = pressed_action
-      method(action)
+      local result = method(action)
+      if result ~= nil then
+        return result
+      end
       return true
     end
   end
@@ -46,7 +49,6 @@ return function()
     local elements_with_touch = {}
     local elements_with_hover = {}
     local elements_with_action = {}
-    local overlap_enabled = true
     local focused_element = nil
     local pressed_element = nil
 
@@ -153,12 +155,6 @@ return function()
       enabled = set
     end
 
-    --- Enable/Disable overlap_enabled(true by default)
-    ---@param set boolean
-    M.set_overlap = function(set)
-      overlap_enabled = set
-    end
-
     --- Add instance of guilib as subprocess.
     --- Usable for popup/hidden elements, when required enable/disable guilib for hidden stuff
     M.create_subprocess = function()
@@ -234,7 +230,7 @@ return function()
 
       if action_id == nil and action.x and action.y then
         for _, element in ipairs(elements_with_hover) do
-          if (not catched or not overlap_enabled) and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
+          if not catched and gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
             if not hovered_elements[element.id] then
               table.insert(enter_elements, element)
             end
@@ -275,7 +271,7 @@ return function()
           end
         end
         for _, element in ipairs(elements_with_touch) do
-          if overlap_enabled and catched ~= nil then return catched end
+          if catched then return catched end
           if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
             if action.pressed then
               catched = call_event(element, element.pressed, action)
@@ -289,7 +285,7 @@ return function()
       if elements_with_action[action_id] then
         if action.x and action.y then
           for _, element in ipairs(elements_with_action[action_id]) do
-            if overlap_enabled and catched ~= nil then return catched end
+            if catched ~= nil then return catched end
             if gui.is_enabled(element.node, true) and gui.pick_node(element.node, action.x, action.y) then
               catched = call_event(element, element[action_id], action)
             end
