@@ -2,7 +2,7 @@
 ---@param log fun(text: string)
 return function(guilib, log)
   -----------------------------------------------
-  guilib.add("box_touch", {
+  guilib.add("box1", {
     pressed = function(e)
       gui.play_flipbook(e.node, "button1")
       log("Pressed")
@@ -13,6 +13,13 @@ return function(guilib, log)
     end,
     hold = function() log("Hold") end,
   })
+
+  local box2 = guilib.add("box2")
+  box2.on(hash("touch"), function(e)
+    if e.pressed then log("pressed")
+    elseif e.released then log("released")
+    else log("hold") end
+  end)
   -- guilib.dump()
   -----------------------------------------------
   guilib.add("box_touch_A", { pressed = function() log("A Clicked") end, })
