@@ -6,22 +6,29 @@ local examples = {
   ["Pressed/Hold/Released"] = require("examples.pressed_hold_released.pressed_hold_released"),
   Hover = require("examples.hover.hover"),
   Drag = require("examples.drag.drag"),
-  Wheel = require("examples.wheel.wheel"),
+  Action = require("examples.action.action"),
   ["Enter/Leave"] = require("examples.enter_leave.enter_leave"),
   Focus = require("examples.focus.focus"),
   ["Click Outside"] = require("examples.click_outside.click_outside"),
   Slider = require("examples.slider.slider")
 }
 
-local log_text_list = {}
-local log_counter = 0
 local current_example = nil
 
+local log_text_list = {}
+local log_counter = 0
+local log_previous_text = nil
 local function log(text)
-  log_counter = log_counter + 1
-  table.insert(log_text_list, 1, tostring(log_counter).. ". " .. text)
-  if #log_text_list>30 then
-    log_text_list[#log_text_list] = nil
+  if log_previous_text == text then
+    log_counter = log_counter + 1
+    log_text_list[1] = string.format("%s (%d)", text, log_counter)
+  else
+    log_counter = 1
+    log_previous_text = text
+    table.insert(log_text_list, 1, text)
+    if #log_text_list>10 then
+      log_text_list[#log_text_list] = nil
+    end
   end
   gui.set_text(gui.get_node("logtext"), table.concat(log_text_list, "\n"))
 end
@@ -51,17 +58,17 @@ function init(self)
 
   dropdown.add("Pressed/Hold/Released")
   dropdown.add("Hover")
-  dropdown.add("Drag")
-  dropdown.add("Wheel")
+  dropdown.add("Action")
   dropdown.add("Enter/Leave")
   dropdown.add("Focus")
   dropdown.add("Click Outside")
+  dropdown.add("Drag")
   dropdown.add("Slider")
 
   dropdown.on_select(function(selection) open_example(self, selection) end)
   dropdown.set_selected("Focus")
-  --
-  -- open_example(self, "Slider")
+
+  -- open_example(self, "Drag")
 end
 
 function on_input(self, action_id, action)

@@ -23,13 +23,20 @@ nodes {
   pivot: PIVOT_NE
   adjust_mode: ADJUST_MODE_ZOOM
   inherit_alpha: true
+  clipping_mode: CLIPPING_MODE_STENCIL
+  clipping_visible: false
+  clipping_inverted: true
   size_mode: SIZE_MODE_AUTO
   visible: false
 }
 nodes {
   position {
-    x: -210.0
-    y: -18.0
+    x: -166.0
+    y: -14.0
+  }
+  scale {
+    x: 0.8
+    y: 0.8
   }
   size {
     x: 200.0
@@ -39,10 +46,83 @@ nodes {
   text: "log"
   font: "default"
   id: "logtext"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_TOP
   pivot: PIVOT_NW
   adjust_mode: ADJUST_MODE_STRETCH
   parent: "logbox"
   inherit_alpha: true
+}
+nodes {
+  position {
+    y: 720.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "top_left"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_ZOOM
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+nodes {
+  position {
+    x: 191.0
+    y: -30.0
+  }
+  type: TYPE_TEMPLATE
+  id: "dropdown"
+  parent: "top_left"
+  inherit_alpha: true
+  template: "/components/dropdown/dropdown.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/root"
+  parent: "dropdown"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/button"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/text_current"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dropdown/text"
+  parent: "dropdown/text_current"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/choice_container"
+  parent: "dropdown/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dropdown/choice_box_template"
+  parent: "dropdown/choice_container"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dropdown/choice_text_template"
+  parent: "dropdown/choice_box_template"
+  template_node_child: true
 }
 nodes {
   position {
@@ -67,13 +147,25 @@ nodes {
 }
 nodes {
   type: TYPE_TEXT
-  id: "Pressed/Hold/Released/touch_text"
+  id: "Pressed/Hold/Released/text"
   parent: "Pressed/Hold/Released/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Pressed/Hold/Released/box_touch"
+  id: "Pressed/Hold/Released/box1"
+  parent: "Pressed/Hold/Released/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Pressed/Hold/Released/text2"
+  parent: "Pressed/Hold/Released/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Pressed/Hold/Released/box2"
   parent: "Pressed/Hold/Released/root"
   template_node_child: true
 }
@@ -179,6 +271,12 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
+  id: "Drag/box"
+  parent: "Drag/box1"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
   id: "Drag/box2"
   parent: "Drag/root"
   template_node_child: true
@@ -195,57 +293,33 @@ nodes {
     y: 352.0
   }
   type: TYPE_TEMPLATE
-  id: "Wheel"
+  id: "Action"
   inherit_alpha: true
-  template: "/examples/wheel/wheel.gui"
+  template: "/examples/action/action.gui"
   enabled: false
 }
 nodes {
   type: TYPE_BOX
-  id: "Wheel/root"
-  parent: "Wheel"
+  id: "Action/root"
+  parent: "Action"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
-  id: "Wheel/text"
-  parent: "Wheel/root"
+  id: "Action/text"
+  parent: "Action/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Wheel/wheel1"
-  parent: "Wheel/root"
+  id: "Action/box"
+  parent: "Action/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEXT
-  id: "Wheel/text9"
-  parent: "Wheel/wheel1"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Wheel/wheel2"
-  parent: "Wheel/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Wheel/text12"
-  parent: "Wheel/wheel2"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Wheel/wheel3"
-  parent: "Wheel/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Wheel/text13"
-  parent: "Wheel/wheel3"
+  id: "Action/text9"
+  parent: "Action/box"
   template_node_child: true
 }
 nodes {
@@ -386,77 +460,6 @@ nodes {
 }
 nodes {
   position {
-    y: 720.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_BOX
-  id: "top_left"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_ZOOM
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
-    x: 191.0
-    y: -30.0
-  }
-  type: TYPE_TEMPLATE
-  id: "dropdown"
-  parent: "top_left"
-  inherit_alpha: true
-  template: "/components/dropdown/dropdown.gui"
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/root"
-  parent: "dropdown"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/button"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/text_current"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "dropdown/text"
-  parent: "dropdown/text_current"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/choice_container"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/choice_box_template"
-  parent: "dropdown/choice_container"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "dropdown/choice_text_template"
-  parent: "dropdown/choice_box_template"
-  template_node_child: true
-}
-nodes {
-  position {
     x: 631.0
     y: 361.0
   }
@@ -536,6 +539,28 @@ nodes {
   id: "Slider/slider/pin"
   parent: "Slider/slider/background"
   template_node_child: true
+}
+nodes {
+  position {
+    x: 1256.0
+    y: 19.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 279.0
+    y: 90.0
+  }
+  type: TYPE_TEXT
+  text: "GuiLib 0.1.4"
+  font: "default"
+  id: "version"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_BOTTOM
+  pivot: PIVOT_SE
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
