@@ -12,7 +12,7 @@ return function(guilib, template_name)
   local NODE_TEXT = gui.get_node(template_name .. "/text")
   local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
   local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
-  local subgui = guilib.create_subprocess()
+  local subgui = guilib.add()
   local on_select_function = function(selection) pprint(selection.. " selected") end
   subgui.set_enabled(opened)
 

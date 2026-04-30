@@ -16,7 +16,7 @@ local function get_scale(node)
 end
 
 
----@param guilib GuiLib
+---@param guilib GuiLibElement
 ---@param namespace string
 ---@return guilib_slider_component
 return function(guilib, namespace, min_value, max_value)
@@ -43,8 +43,6 @@ return function(guilib, namespace, min_value, max_value)
     gui.set_position(pin.node, screen_pos*scale)
   end)
 
-  --- reset namespace
-  guilib.set_namespace("")
 
   slider.on_change = function(fun)
   end
