@@ -1,4 +1,4 @@
- local TOUCH_ACTION = hash('touch')
+local TOUCH_ACTION = hash('touch')
 local pressed_action = {}
 
 local function set_element_first(list, element)
@@ -124,53 +124,52 @@ return function()
         catched = el.on_input(action_id, action)
       end
 
-      if p_node == nil then return end
-
-      if action_id == nil and action.x and action.y then
-
-        local do_enter = false
-        local do_leave = false
-        if not catched and gui.pick_node(element.node, action.x, action.y) then
-          if not is_hovered then do_enter = true end
-          catched = call_event(element, element.hover, action)
-        else
-          if is_hovered then do_leave = true end
-        end
-
-        if do_leave then
-          call_event(element, element.leave, action)
-          is_hovered = false
-        end
-
-        if do_enter then
-          is_hovered = true
-          call_event(element, element.enter, action)
-        end
-      elseif action_id == TOUCH_ACTION then
-        if is_pressed then
-          action.is_picked = gui.pick_node(element.node, action.x, action.y)
-          if action.released then
-            is_pressed = false
-            catched = call_event(element, element.released, action)
-          elseif action.pressed == false then
-            catched = call_event(element, element.hold, action)
+      if element.node then
+        if action_id == nil and action.x and action.y then
+          local do_enter = false
+          local do_leave = false
+          if not catched and gui.pick_node(element.node, action.x, action.y) then
+            if not is_hovered then do_enter = true end
+            catched = call_event(element, element.hover, action)
+          else
+            if is_hovered then do_leave = true end
           end
-        end
-        if not catched and gui.pick_node(element.node, action.x, action.y) then
-          if action.pressed then
-            is_pressed = true
-            is_focused = true
-            catched = call_event(element, element.pressed, action)
+
+          if do_leave then
+            call_event(element, element.leave, action)
+            is_hovered = false
           end
-        else
-           if action.pressed then
-            call_event(element, element.click_outside, action)
-           end
+
+          if do_enter then
+            is_hovered = true
+            call_event(element, element.enter, action)
+          end
+        elseif action_id == TOUCH_ACTION then
+          if is_pressed then
+            action.is_picked = gui.pick_node(element.node, action.x, action.y)
+            if action.released then
+              is_pressed = false
+              catched = call_event(element, element.released, action)
+            elseif action.pressed == false then
+              catched = call_event(element, element.hold, action)
+            end
+          end
+          if not catched and gui.pick_node(element.node, action.x, action.y) then
+            if action.pressed then
+              is_pressed = true
+              is_focused = true
+              catched = call_event(element, element.pressed, action)
+            end
+          else
+            if action.pressed then
+              call_event(element, element.click_outside, action)
+            end
+          end
         end
       end
       if element[action_id] then
         if action.x and action.y then
-          if gui.pick_node(element.node, action.x, action.y) then
+          if element.node and gui.pick_node(element.node, action.x, action.y) then
             catched = call_event(element, element[action_id], action)
           end
         else
