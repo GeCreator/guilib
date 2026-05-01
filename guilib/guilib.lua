@@ -107,10 +107,9 @@ return function()
 
     element.clear = function()
       namespace = ""
-      clear_table(children)
       is_hovered = false
-      is_focused = false
       is_pressed = false
+      clear_table(children)
     end
 
     element.dump = function()
@@ -178,8 +177,6 @@ return function()
           call_event(element, element[action_id], action)
         end
       end
-
-
       return catched
     end
     return element
