@@ -1,6 +1,6 @@
 ---@param element GuiLibElement
 ---@return GuiLibElement
-local function draggable(element)
+local function dragable(element)
   local offset = vmath.vector3(0)
   element.on("pressed", function(action)
     local mouse_pos = vmath.vector3(action.screen_x, action.screen_y, 0)
@@ -14,5 +14,5 @@ local function draggable(element)
 end
 
 return {
-  draggable = draggable
+  dragable = dragable
 }

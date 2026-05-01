@@ -171,47 +171,6 @@ nodes {
 }
 nodes {
   position {
-    x: 635.0
-    y: 389.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Drag"
-  inherit_alpha: true
-  template: "/examples/drag/drag.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Drag/root"
-  parent: "Drag"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Drag/drag_text"
-  parent: "Drag/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Drag/box1"
-  parent: "Drag/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Drag/box2"
-  parent: "Drag/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Drag/box3"
-  parent: "Drag/root"
-  template_node_child: true
-}
-nodes {
-  position {
     x: 577.0
     y: 352.0
   }
@@ -294,95 +253,6 @@ nodes {
 }
 nodes {
   position {
-    x: 567.0
-    y: 354.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Focus"
-  inherit_alpha: true
-  template: "/examples/focus/focus.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/root"
-  parent: "Focus"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/box_focus_A"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Focus/text"
-  parent: "Focus/box_focus_A"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/box_focus_B"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Focus/text2"
-  parent: "Focus/box_focus_B"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/box_focus_C"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Focus/text8"
-  parent: "Focus/box_focus_C"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/set_focus_A"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Focus/text1"
-  parent: "Focus/set_focus_A"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/set_focus_B"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Focus/text3"
-  parent: "Focus/set_focus_B"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Focus/set_focus_C"
-  parent: "Focus/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Focus/text4"
-  parent: "Focus/set_focus_C"
-  template_node_child: true
-}
-nodes {
-  position {
     x: 631.0
     y: 361.0
   }
@@ -420,6 +290,47 @@ nodes {
   type: TYPE_TEXT
   id: "Click Outside/text5"
   parent: "Click Outside/B"
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 635.0
+    y: 389.0
+  }
+  type: TYPE_TEMPLATE
+  id: "Components: Dragable"
+  inherit_alpha: true
+  template: "/examples/components/dragable/dragable.gui"
+  enabled: false
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Dragable/root"
+  parent: "Components: Dragable"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Components: Dragable/drag_text"
+  parent: "Components: Dragable/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Dragable/box1"
+  parent: "Components: Dragable/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Dragable/box2"
+  parent: "Components: Dragable/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Dragable/box3"
+  parent: "Components: Dragable/root"
   template_node_child: true
 }
 nodes {

@@ -5,7 +5,7 @@ local dropdown_component = require "components.dropdown.dropdown"
 local examples = {
   ["Pressed/Hold/Released"] = require("examples.pressed_hold_released.pressed_hold_released"),
   Hover = require("examples.hover.hover"),
-  Drag = require("examples.drag.drag"),
+  ["Components: Dragable"] = require("examples.components.dragable.dragable"),
   Action = require("examples.action.action"),
   ["Enter/Leave"] = require("examples.enter_leave.enter_leave"),
   ["Click Outside"] = require("examples.click_outside.click_outside"),
@@ -60,8 +60,8 @@ function init(self)
   dropdown.add("Action")
   dropdown.add("Enter/Leave")
   dropdown.add("Click Outside")
-  dropdown.add("Drag")
   dropdown.add("Slider")
+  dropdown.add("Components: Dragable")
   --
   dropdown.on_select(function(selection) open_example(showcase, selection) end)
   dropdown.set_selected("Action")
