@@ -47,7 +47,6 @@ return function()
   local function create_element(p_node, p_base_namespace)
     local children = {}
     local is_hovered = false
-    local is_focused = false
     local is_pressed = false
     local namespace = p_base_namespace
     local enabled = true
@@ -66,6 +65,7 @@ return function()
     local element = {
       ---@type node
       node = p_node,
+      actions = {},
     }
     element.set_namespace = function(set)
       namespace = p_base_namespace .. set
@@ -82,14 +82,14 @@ return function()
     ---@param action hash|string
     ---@param handler fun(action: table)
     element.on = function(action, handler)
-      if element[action] then
-        local previous_handler = element[action]
-        element[action] = function(e)
+      if element.actions[action] then
+        local previous_handler = element.actions[action]
+        element.actions[action] = function(e)
           previous_handler(e)
           handler(e)
         end
       else
-        element[action] = handler
+        element.actions[action] = handler
       end
       return element
     end
@@ -130,50 +130,49 @@ return function()
           local do_leave = false
           if not catched and gui.pick_node(element.node, action.x, action.y) then
             if not is_hovered then do_enter = true end
-            catched = call_event(element, element.hover, action)
+            catched = call_event(element, element.actions.hover, action)
           else
             if is_hovered then do_leave = true end
           end
 
           if do_leave then
-            call_event(element, element.leave, action)
+            call_event(element, element.actions.leave, action)
             is_hovered = false
           end
 
           if do_enter then
             is_hovered = true
-            call_event(element, element.enter, action)
+            call_event(element, element.actions.enter, action)
           end
         elseif action_id == TOUCH_ACTION then
           if is_pressed then
             action.is_picked = gui.pick_node(element.node, action.x, action.y)
             if action.released then
               is_pressed = false
-              catched = call_event(element, element.released, action)
+              catched = call_event(element, element.actions.released, action)
             elseif action.pressed == false then
-              catched = call_event(element, element.hold, action)
+              catched = call_event(element, element.actions.hold, action)
             end
           end
           if not catched and gui.pick_node(element.node, action.x, action.y) then
             if action.pressed then
               is_pressed = true
-              is_focused = true
-              catched = call_event(element, element.pressed, action)
+              catched = call_event(element, element.actions.pressed, action)
             end
           else
             if action.pressed then
-              call_event(element, element.click_outside, action)
+              call_event(element, element.actions.click_outside, action)
             end
           end
         end
       end
-      if element[action_id] then
+      if element.actions[action_id] then
         if action.x and action.y then
           if element.node and gui.pick_node(element.node, action.x, action.y) then
-            catched = call_event(element, element[action_id], action)
+            catched = call_event(element, element.actions[action_id], action)
           end
         else
-          call_event(element, element[action_id], action)
+          call_event(element, element.actions[action_id], action)
         end
       end
       return catched
