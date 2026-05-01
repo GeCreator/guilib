@@ -16,11 +16,14 @@ return function(guilib, log)
 
   local box2 = guilib.add("box2")
   box2.on(hash("touch"), function(e)
-    if e.pressed then log("pressed")
-    elseif e.released then log("released")
+    if e.pressed then
+      gui.play_flipbook(e.node, "button1")
+      log("pressed")
+    elseif e.released then
+      gui.play_flipbook(e.node, "button0")
+      log("released")
     else log("hold") end
   end)
-  -- guilib.dump()
   ---------------------------------------------
   guilib.add("box_touch_A", { pressed = function() log("A Clicked") end, })
   guilib.add("box_touch_B", { pressed = function() log("B Clicked") end, })
