@@ -1,10 +1,12 @@
 local PADDING = 2
 
----@param guilib GuiLib
+---@param guilib GuiLibElement
 ---@param template_name string
 ---
 ---@return guilib_dropdown_component
 return function(guilib, template_name)
+  local main = guilib.add(template_name .. "/root")
+  local sub = main.add()
   local choices = {}
   local opened = false
   local NODE_CHOICE_BOX_TEMPLATE = gui.get_node(template_name .. "/choice_box_template")
@@ -12,13 +14,11 @@ return function(guilib, template_name)
   local NODE_TEXT = gui.get_node(template_name .. "/text")
   local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
   local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
-  local subgui = guilib.add()
   local on_select_function = function(selection) pprint(selection.. " selected") end
-  subgui.set_enabled(opened)
 
   local function refresh()
     gui.set_enabled(NODE_CHOICE_BOX_CONTAINER, opened)
-    subgui.set_enabled(opened)
+    sub.set_enabled(opened)
   end
   refresh()
 
@@ -29,18 +29,24 @@ return function(guilib, template_name)
     refresh()
   end
 
-  ---@class guilib_dropdown_component
-  local dropdown = {
-    click_outside = function()
+
+  main.on("click_outside", function()
+    opened = false
+    refresh()
+  end)
+  main.on("pressed", function()
+    opened = not opened
+    refresh()
+  end)
+  main.on(hash('key_esc'), function(a)
+    if a.pressed then
       opened = false
       refresh()
-    end,
-    focus = function() end,
-    ---@private
-    pressed = function()
-      opened = not opened
-      refresh()
-    end,
+    end
+  end)
+
+  ---@class guilib_dropdown_component
+  local dropdown = {
     add = function(name)
       local clone = gui.clone_tree(NODE_CHOICE_BOX_TEMPLATE)
       local size = gui.get_size(clone[HASH_CHOICE_BOX])
@@ -56,7 +62,7 @@ return function(guilib, template_name)
       gui.set_size(NODE_CHOICE_BOX_CONTAINER, container_size)
       local base_color = gui.get_color(clone[HASH_CHOICE_BOX])
       local hover_color = vmath.vector4(base_color.x*1.1, base_color.y*1.1, base_color.z*1.1, 1.0)
-      subgui.add(clone[HASH_CHOICE_BOX], {
+      sub.add(clone[HASH_CHOICE_BOX], {
         pressed = function()
           select(name)
         end,
@@ -72,17 +78,10 @@ return function(guilib, template_name)
     on_select = function(fun)
       on_select_function = fun
     end,
-    [hash('key_esc')] = function(a)
-      if a.pressed then
-        opened = false
-        refresh()
-      end
-    end,
     ---@param selection string
     set_selected = function(selection)
       select(selection)
     end,
   }
-  guilib.add(template_name .. "/root", dropdown)
   return dropdown
 end

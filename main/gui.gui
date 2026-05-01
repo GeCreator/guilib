@@ -200,12 +200,6 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "Drag/box"
-  parent: "Drag/box1"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
   id: "Drag/box2"
   parent: "Drag/root"
   template_node_child: true
