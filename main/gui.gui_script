@@ -8,7 +8,6 @@ local examples = {
   Drag = require("examples.drag.drag"),
   Action = require("examples.action.action"),
   ["Enter/Leave"] = require("examples.enter_leave.enter_leave"),
-  Focus = require("examples.focus.focus"),
   ["Click Outside"] = require("examples.click_outside.click_outside"),
   Slider = require("examples.slider.slider")
 }
@@ -60,7 +59,6 @@ function init(self)
   dropdown.add("Hover")
   dropdown.add("Action")
   dropdown.add("Enter/Leave")
-  dropdown.add("Focus")
   dropdown.add("Click Outside")
   dropdown.add("Drag")
   dropdown.add("Slider")
