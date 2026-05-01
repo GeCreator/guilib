@@ -106,6 +106,7 @@ return function()
     end
 
     element.clear = function()
+      namespace = ""
       clear_table(children)
       is_hovered = false
       is_focused = false
@@ -147,12 +148,6 @@ return function()
           call_event(element, element.enter, action)
         end
       elseif action_id == TOUCH_ACTION then
-        -- if is_focused and action.pressed and element.click_outside then
-        --   if not gui.pick_node(element.node, action.x, action.y) then
-        --     call_event(element, element.click_outside, action)
-        --   end
-        -- end
-        -- call released even if not pick to node
         if is_pressed then
           action.is_picked = gui.pick_node(element.node, action.x, action.y)
           if action.released then
@@ -173,18 +168,18 @@ return function()
             call_event(element, element.click_outside, action)
            end
         end
-        if element[action_id] then
-          if action.x and action.y then
-            if gui.pick_node(element.node, action.x, action.y) then
-              catched = call_event(element, element[action_id], action)
-            end
-          else
-            if is_focused then
-              catched = call_event(element, element[action_id], action)
-            end
+      end
+      if element[action_id] then
+        if action.x and action.y then
+          if gui.pick_node(element.node, action.x, action.y) then
+            catched = call_event(element, element[action_id], action)
           end
+        else
+          call_event(element, element[action_id], action)
         end
       end
+
+
       return catched
     end
     return element
