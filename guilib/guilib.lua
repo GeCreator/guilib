@@ -112,10 +112,6 @@ return function()
       clear_table(children)
     end
 
-    element.dump = function()
-      pprint(children)
-    end
-
     element.on_input = function(action_id, action)
       if not enabled then return end
       if p_node and not gui.is_enabled(element.node, true) then return end
