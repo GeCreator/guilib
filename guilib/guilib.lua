@@ -112,6 +112,15 @@ return function()
       clear_table(children)
     end
 
+    element.emit_action = function(action_id, action_data, recursive)
+      call_event(element, element.actions[action_id], action_data or {})
+      if recursive == nil or recursive == true then
+        for _, c in ipairs(children) do
+          c.emit_action(action_id, action_data, recursive)
+        end
+      end
+    end
+
     element.on_input = function(action_id, action)
       if not enabled then return end
       if p_node and not gui.is_enabled(element.node, true) then return end
