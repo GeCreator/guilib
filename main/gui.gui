@@ -294,6 +294,59 @@ nodes {
 }
 nodes {
   position {
+    x: 543.0
+    y: 360.0
+  }
+  type: TYPE_TEMPLATE
+  id: "Emit Action"
+  inherit_alpha: true
+  template: "/examples/emit_action/emit_action.gui"
+  enabled: false
+}
+nodes {
+  type: TYPE_BOX
+  id: "Emit Action/root"
+  parent: "Emit Action"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Emit Action/box"
+  parent: "Emit Action/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Emit Action/text9"
+  parent: "Emit Action/box"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Emit Action/box1"
+  parent: "Emit Action/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Emit Action/text"
+  parent: "Emit Action/box1"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Emit Action/box2"
+  parent: "Emit Action/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "Emit Action/text1"
+  parent: "Emit Action/box2"
+  template_node_child: true
+}
+nodes {
+  position {
     x: 635.0
     y: 389.0
   }
@@ -339,39 +392,39 @@ nodes {
     y: 318.0
   }
   type: TYPE_TEMPLATE
-  id: "Slider"
+  id: "Components: Slider"
   inherit_alpha: true
-  template: "/examples/slider/slider.gui"
+  template: "/examples/components/slider/slider.gui"
   enabled: false
 }
 nodes {
   type: TYPE_BOX
-  id: "Slider/root"
-  parent: "Slider"
+  id: "Components: Slider/root"
+  parent: "Components: Slider"
   template_node_child: true
 }
 nodes {
   type: TYPE_TEMPLATE
-  id: "Slider/slider"
-  parent: "Slider/root"
+  id: "Components: Slider/slider"
+  parent: "Components: Slider/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Slider/slider/root"
-  parent: "Slider/slider"
+  id: "Components: Slider/slider/root"
+  parent: "Components: Slider/slider"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Slider/slider/background"
-  parent: "Slider/slider/root"
+  id: "Components: Slider/slider/background"
+  parent: "Components: Slider/slider/root"
   template_node_child: true
 }
 nodes {
   type: TYPE_BOX
-  id: "Slider/slider/pin"
-  parent: "Slider/slider/background"
+  id: "Components: Slider/slider/pin"
+  parent: "Components: Slider/slider/background"
   template_node_child: true
 }
 nodes {

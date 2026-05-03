@@ -5,11 +5,12 @@ local dropdown_component = require "components.dropdown.dropdown"
 local examples = {
   ["Pressed/Hold/Released"] = require("examples.pressed_hold_released.pressed_hold_released"),
   Hover = require("examples.hover.hover"),
-  ["Components: Dragable"] = require("examples.components.dragable.dragable"),
   Action = require("examples.action.action"),
   ["Enter/Leave"] = require("examples.enter_leave.enter_leave"),
   ["Click Outside"] = require("examples.click_outside.click_outside"),
-  Slider = require("examples.slider.slider")
+  ["Emit Action"] = require("examples.emit_action.emit_action"),
+  ["Components: Dragable"] = require("examples.components.dragable.dragable"),
+  ["Components: Slider"] = require("examples.components.slider.slider")
 }
 
 local current_example = nil
@@ -60,11 +61,12 @@ function init(self)
   dropdown.add("Action")
   dropdown.add("Enter/Leave")
   dropdown.add("Click Outside")
-  dropdown.add("Slider")
+  dropdown.add("Emit Action")
   dropdown.add("Components: Dragable")
+  dropdown.add("Components: Slider")
   --
   dropdown.on_select(function(selection) open_example(showcase, selection) end)
-  dropdown.set_selected("Action")
+  dropdown.set_selected("Emit Action")
   -- open_example(showcase, "Click Outside")
 end
 
