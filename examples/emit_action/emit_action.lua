@@ -1,0 +1,26 @@
+
+
+
+
+
+
+---@param element GuiLibElement
+function create_box(element, name)
+  local el = element.add(name)
+  el.on(hash('my_action'), function(action) gui.set_color(el.node, vmath.vector4(math.random(),math.random(),math.random(), 1)) end)
+  return el
+end
+
+---@param element GuiLibElement
+---@param log fun(text: string)
+return function(element, log)
+  local b = create_box(element, "box")
+  b = create_box(b, "box1")
+  create_box(b, "box2")
+
+  element.on(hash("key_space"), function(e)
+    if e.released then
+      element.emit_action(hash("my_action"))
+    end
+  end)
+end
