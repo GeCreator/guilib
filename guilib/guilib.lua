@@ -49,7 +49,6 @@ return function()
     local is_hovered = false
     local is_pressed = false
     local namespace = p_namespace
-    local enabled = true
 
     local function __get_node(node)
       if type(node) == "string" then
@@ -83,9 +82,9 @@ return function()
       return namespace
     end
 
+    ---@param set bool
     element.set_enabled = function(set)
-      enabled = set
-      gui.set_enabled(element.node, enabled)
+      gui.set_enabled(element.node, set)
     end
     ---Bind action to node
     ---@param action hash|string
@@ -131,7 +130,6 @@ return function()
     end
 
     element.on_input = function(action_id, action)
-      if not enabled then return end
       if not gui.is_enabled(element.node, true) then return end
 
       for _, el in ipairs(children) do
