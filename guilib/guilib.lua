@@ -187,6 +187,12 @@ return function()
       end
       return catched
     end
+
+    ---@return table<GuiLibElement>
+    element.get_children = function()
+      return children
+    end
+
     return element
   end
 
