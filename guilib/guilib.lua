@@ -1,6 +1,16 @@
 local TOUCH_ACTION = hash('touch')
 local pressed_action = {}
 
+local function dump_tree(el, level)
+  local disabled_status = ""
+  if not gui.is_enabled(el.node) then disabled_status = " (Disabled)" end
+  local result = string.rep("  ", level) .. tostring(gui.get_id(el.node)) .. disabled_status .."\n"
+  for i, e in ipairs(el.get_children()) do
+    result = result .. dump_tree(e, level + 1)
+  end
+  return result
+end
+
 local function set_element_first(list, element)
   local pos = 0
   for i, el in ipairs(list) do
@@ -201,6 +211,7 @@ return function()
   gui.set_id(pseudo_element, hash("guilib:root"))
   gui.set_visible(pseudo_element, false)
   local root_element = create_element(pseudo_element, "")
+  ---@class GuiLibRoot
   local g = {}
   g.on_input = function(action_id, action)
     --- store active(pressed) actions in global storage
@@ -213,5 +224,8 @@ return function()
     root_element.on_input(action_id, action)
   end
   g.add = root_element.add
+  g.dump_tree = function()
+    pprint("\n" .. dump_tree(root_element, 0))
+  end
   return g
 end
