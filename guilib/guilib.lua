@@ -187,22 +187,23 @@ return function()
   local pseudo_element = gui.new_box_node(vmath.vector3(), vmath.vector3())
   gui.set_id(pseudo_element, hash("guilib:root"))
   gui.set_visible(pseudo_element, false)
-  local root_element = create_element(pseudo_element, "")
+
   ---@class GuiLibRoot : GuiLibElement
-  local g = {}
-  g.on_input = function(action_id, action)
-    --- store active(pressed) actions in global storage
-    if action.pressed then
-      pressed_action[action_id] = true
-    elseif action.released then
-      pressed_action[action_id] = nil
-    end
-    catched = nil
-    root_element.on_input(action_id, action)
+  local root_element = create_element(pseudo_element, "")
+  local on_input = root_element.on_input
+  root_element.on_input = function(action_id, action)
+      --- store active(pressed) actions in global storage
+      if action.pressed then
+        pressed_action[action_id] = true
+      elseif action.released then
+        pressed_action[action_id] = nil
+      end
+      catched = nil
+      on_input(action_id, action)
   end
-  g.add = root_element.add
-  g.dump_tree = function()
-    pprint("\n" .. dump_tree(root_element, 0))
+  root_element.dump_tree = function()
+    pprint(dump_tree(root_element, 0))
   end
-  return g
+
+  return root_element
 end
