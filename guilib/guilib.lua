@@ -85,7 +85,7 @@ return function()
 
     element.set_enabled = function(set)
       enabled = set
-      gui.set_enabled(p_node, enabled)
+      gui.set_enabled(element.node, enabled)
     end
     ---Bind action to node
     ---@param action hash|string

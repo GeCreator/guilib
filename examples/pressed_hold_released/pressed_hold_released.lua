@@ -18,10 +18,10 @@ return function(guilib, log)
   box2.on(hash("touch"), function(e)
     if e.pressed then
       gui.play_flipbook(e.node, "button1")
-      log("pressed")
+      log("Pressed")
     elseif e.released then
       gui.play_flipbook(e.node, "button0")
-      log("released")
+      log("Released")
     else log("Hold") end
   end)
   ---------------------------------------------

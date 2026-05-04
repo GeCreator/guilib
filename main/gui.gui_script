@@ -38,10 +38,10 @@ local function log_clear()
   log_text_list = {}
 end
 
----@param showcase GuiLibElement
-local function open_example(showcase, name)
-  if current_example then gui.set_enabled(current_example.node, false) end
-  current_example = showcase.add(name .. "/root")
+---@param guiroot GuiLibElement
+local function open_example(guiroot, name)
+  if current_example then current_example.set_enabled(false) current_example.clear() end
+  current_example = guiroot.add(name .. "/root")
   gui.set_enabled(current_example.node, true)
   current_example.set_namespace(name)
   examples[name](current_example, log)
