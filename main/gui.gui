@@ -486,12 +486,6 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "dropdown/button"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
   id: "dropdown/text_current"
   parent: "dropdown/root"
   template_node_child: true

@@ -50,14 +50,14 @@ return function(guilib, template_name)
       local clone = gui.clone_tree(NODE_CHOICE_BOX_TEMPLATE)
       local size = gui.get_size(clone[HASH_CHOICE_BOX])
       local position = gui.get_position(clone[HASH_CHOICE_BOX])
-      position.y = size.y * -#choices
+      position.y = size.y * -#choices - PADDING
       gui.set_text(clone[HASH_CHOICE_TEXT], name)
       gui.set_position(clone[HASH_CHOICE_BOX], position)
       gui.set_enabled(clone[HASH_CHOICE_BOX], true)
 
       table.insert(choices, name)
       local container_size = gui.get_size(NODE_CHOICE_BOX_CONTAINER)
-      container_size.y = size.y * #choices + PADDING
+      container_size.y = size.y * #choices + PADDING * 2
       gui.set_size(NODE_CHOICE_BOX_CONTAINER, container_size)
       local base_color = gui.get_color(clone[HASH_CHOICE_BOX])
       local hover_color = vmath.vector4(base_color.x*1.1, base_color.y*1.1, base_color.z*1.1, 1.0)
