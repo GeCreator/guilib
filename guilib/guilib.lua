@@ -1,10 +1,11 @@
 local TOUCH_ACTION = hash('touch')
 local pressed_action = {}
 
+---@param el GuiLibElement
 local function dump_tree(el, level)
   local disabled_status = ""
   if not gui.is_enabled(el.node) then disabled_status = " (Disabled)" end
-  local result = string.rep("  ", level) .. tostring(gui.get_id(el.node)) .. disabled_status .."\n"
+  local result = "\n" .. string.rep("  ", level) .. tostring(gui.get_id(el.node)) .. disabled_status
   for i, e in ipairs(el.get_children()) do
     result = result .. dump_tree(e, level + 1)
   end
@@ -180,6 +181,10 @@ return function()
       return children
     end
 
+    element.dump_tree = function()
+      pprint(dump_tree(element, 0))
+    end
+
     return element
   end
 
@@ -200,9 +205,6 @@ return function()
       end
       catched = nil
       on_input(action_id, action)
-  end
-  root_element.dump_tree = function()
-    pprint(dump_tree(root_element, 0))
   end
 
   return root_element

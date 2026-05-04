@@ -45,6 +45,7 @@ local function open_example(guiroot, name)
   gui.set_enabled(current_example.node, true)
   current_example.set_namespace(name)
   examples[name](current_example, log)
+  current_example.dump_tree()
   log_clear()
 end
 
