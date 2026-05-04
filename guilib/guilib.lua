@@ -22,7 +22,7 @@ local function set_element_first(list, element)
   end
 end
 
----@param el GuiLibElement
+---@param el GuiLibBase
 local function dump_tree(el, level)
   local disabled_status = ""
   if not gui.is_enabled(el.node) then disabled_status = " (Disabled)" end
@@ -110,6 +110,8 @@ return function()
       return element
     end
 
+    ---@param node string|userdata
+    ---@param actions table
     element.add = function(node, actions)
       ---@class GuiLibElement: GuiLibBase
       local child = create_element(node, namespace)
@@ -119,6 +121,8 @@ return function()
           child.on(action_id, action)
         end
       end
+
+      ---@param update_index? boolean
       child.move_to_top = function(update_index)
         set_element_first(children, child)
         if update_index then
@@ -212,9 +216,6 @@ return function()
 
     element.dump_tree = function()
       pprint(dump_tree(element, 0))
-    end
-
-    element.move_to_top = function()
     end
 
     return element
