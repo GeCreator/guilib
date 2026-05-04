@@ -44,11 +44,11 @@ end
 return function()
   local catched = nil
 
-  local function create_element(p_node, p_base_namespace)
+  local function create_element(p_node, p_namespace)
     local children = {}
     local is_hovered = false
     local is_pressed = false
-    local namespace = p_base_namespace
+    local namespace = p_namespace
     local enabled = true
 
     local function __get_node(node)
@@ -58,25 +58,34 @@ return function()
       return node
     end
 
-    if p_node then
-      p_node = __get_node(p_node)
-    end
     ---@class GuiLibElement
     local element = {
       ---@type node
-      node = p_node,
+      node = __get_node(p_node),
       actions = {},
     }
-    element.set_namespace = function(set)
-      namespace = p_base_namespace .. set
+
+    ---@param set string
+    ---@param append? boolean
+    element.set_namespace = function(set, append)
+      if append then
+        namespace = namespace .. set
+      else
+        namespace = set
+      end
       if not string.match(namespace, "(/)$") then
         namespace = namespace .. "/"
       end
     end
 
+    ---@return string
+    element.get_namespace = function()
+      return namespace
+    end
+
     element.set_enabled = function(set)
       enabled = set
-      if p_node then gui.set_enabled(p_node, enabled) end
+      gui.set_enabled(p_node, enabled)
     end
     ---Bind action to node
     ---@param action hash|string
@@ -123,51 +132,49 @@ return function()
 
     element.on_input = function(action_id, action)
       if not enabled then return end
-      if p_node and not gui.is_enabled(element.node, true) then return end
+      if not gui.is_enabled(element.node, true) then return end
 
       for _, el in ipairs(children) do
         catched = el.on_input(action_id, action)
       end
 
-      if element.node then
-        if action_id == nil and action.x and action.y then
-          local do_enter = false
-          local do_leave = false
-          if not catched and gui.pick_node(element.node, action.x, action.y) then
-            if not is_hovered then do_enter = true end
-            catched = call_event(element, element.actions.hover, action)
-          else
-            if is_hovered then do_leave = true end
-          end
+      if action_id == nil and action.x and action.y then
+        local do_enter = false
+        local do_leave = false
+        if not catched and gui.pick_node(element.node, action.x, action.y) then
+          if not is_hovered then do_enter = true end
+          catched = call_event(element, element.actions.hover, action)
+        else
+          if is_hovered then do_leave = true end
+        end
 
-          if do_leave then
-            call_event(element, element.actions.leave, action)
-            is_hovered = false
-          end
+        if do_leave then
+          call_event(element, element.actions.leave, action)
+          is_hovered = false
+        end
 
-          if do_enter then
-            is_hovered = true
-            call_event(element, element.actions.enter, action)
+        if do_enter then
+          is_hovered = true
+          call_event(element, element.actions.enter, action)
+        end
+      elseif action_id == TOUCH_ACTION then
+        if is_pressed then
+          action.is_picked = gui.pick_node(element.node, action.x, action.y)
+          if action.released then
+            is_pressed = false
+            catched = call_event(element, element.actions.released, action)
+          elseif action.pressed == false then
+            catched = call_event(element, element.actions.hold, action)
           end
-        elseif action_id == TOUCH_ACTION then
-          if is_pressed then
-            action.is_picked = gui.pick_node(element.node, action.x, action.y)
-            if action.released then
-              is_pressed = false
-              catched = call_event(element, element.actions.released, action)
-            elseif action.pressed == false then
-              catched = call_event(element, element.actions.hold, action)
-            end
+        end
+        if not catched and gui.pick_node(element.node, action.x, action.y) then
+          if action.pressed then
+            is_pressed = true
+            catched = call_event(element, element.actions.pressed, action)
           end
-          if not catched and gui.pick_node(element.node, action.x, action.y) then
-            if action.pressed then
-              is_pressed = true
-              catched = call_event(element, element.actions.pressed, action)
-            end
-          else
-            if action.pressed then
-              call_event(element, element.actions.click_outside, action)
-            end
+        else
+          if action.pressed then
+            call_event(element, element.actions.click_outside, action)
           end
         end
       end
@@ -185,7 +192,11 @@ return function()
     return element
   end
 
-  local root_element = create_element(nil, "")
+  ---- Make root element
+  local pseudo_element = gui.new_box_node(vmath.vector3(), vmath.vector3())
+  gui.set_id(pseudo_element, hash("guilib:root"))
+  gui.set_visible(pseudo_element, false)
+  local root_element = create_element(pseudo_element, "")
   local g = {}
   g.on_input = function(action_id, action)
     --- store active(pressed) actions in global storage

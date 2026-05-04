@@ -41,20 +41,18 @@ end
 ---@param showcase GuiLibElement
 local function open_example(showcase, name)
   if current_example then gui.set_enabled(current_example.node, false) end
-  showcase.clear()
   current_example = showcase.add(name .. "/root")
   gui.set_enabled(current_example.node, true)
-  showcase.set_namespace(name)
-  examples[name](showcase, log)
+  current_example.set_namespace(name)
+  examples[name](current_example, log)
   log_clear()
 end
 
 function init(self)
   msg.post(".", "acquire_input_focus")
-  self.guilib = guilib()
-  local showcase = self.guilib.add()
+  self.guiroot = guilib()
 
-  local dropdown = dropdown_component(self.guilib, "dropdown")
+  local dropdown = dropdown_component(self.guiroot, "dropdown")
 
   dropdown.add("Pressed/Hold/Released")
   dropdown.add("Hover")
@@ -65,11 +63,11 @@ function init(self)
   dropdown.add("Components: Dragable")
   dropdown.add("Components: Slider")
   --
-  dropdown.on_select(function(selection) open_example(showcase, selection) end)
-  dropdown.set_selected("Emit Action")
-  -- open_example(showcase, "Click Outside")
+  dropdown.on_select(function(selection) open_example(self.guiroot, selection) end)
+  dropdown.set_selected("Pressed/Hold/Released")
+  open_example(self.guiroot, "Components: Slider")
 end
 
 function on_input(self, action_id, action)
-  self.guilib.on_input(action_id, action)
+  self.guiroot.on_input(action_id, action)
 end

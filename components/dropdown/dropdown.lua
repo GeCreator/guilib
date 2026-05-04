@@ -6,7 +6,6 @@ local PADDING = 2
 ---@return guilib_dropdown_component
 return function(guilib, template_name)
   local main = guilib.add(template_name .. "/root")
-  local sub = main.add()
   local choices = {}
   local opened = false
   local NODE_CHOICE_BOX_TEMPLATE = gui.get_node(template_name .. "/choice_box_template")
@@ -15,6 +14,7 @@ return function(guilib, template_name)
   local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
   local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
   local on_select_function = function(selection) pprint(selection.. " selected") end
+  local sub = main.add(NODE_CHOICE_BOX_CONTAINER)
 
   local function refresh()
     gui.set_enabled(NODE_CHOICE_BOX_CONTAINER, opened)
@@ -28,7 +28,6 @@ return function(guilib, template_name)
     opened = false
     refresh()
   end
-
 
   main.on("click_outside", function()
     opened = false

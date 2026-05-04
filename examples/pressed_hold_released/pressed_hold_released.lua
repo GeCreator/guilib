@@ -22,7 +22,7 @@ return function(guilib, log)
     elseif e.released then
       gui.play_flipbook(e.node, "button0")
       log("released")
-    else log("hold") end
+    else log("Hold") end
   end)
   ---------------------------------------------
   guilib.add("box_touch_A", { pressed = function() log("A Clicked") end, })

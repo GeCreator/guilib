@@ -17,12 +17,12 @@ end
 
 
 ---@param guilib GuiLibElement
----@param namespace string
+---@param template string
 ---@return guilib_slider_component
-return function(guilib, namespace, min_value, max_value)
+return function(guilib, template, min_value, max_value)
   ---@class guilib_slider_component
   local slider = {}
-  guilib.set_namespace(namespace)
+  guilib.set_namespace(template, true)
 
   local pin = guilib.add("pin")
   local pin_position = gui.get_screen_position(pin.node)
