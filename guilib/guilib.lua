@@ -188,7 +188,7 @@ return function()
   gui.set_id(pseudo_element, hash("guilib:root"))
   gui.set_visible(pseudo_element, false)
   local root_element = create_element(pseudo_element, "")
-  ---@class GuiLibRoot
+  ---@class GuiLibRoot : GuiLibElement
   local g = {}
   g.on_input = function(action_id, action)
     --- store active(pressed) actions in global storage
