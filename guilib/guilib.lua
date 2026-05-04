@@ -1,6 +1,27 @@
 local TOUCH_ACTION = hash('touch')
 local pressed_action = {}
 
+local function make_fake_node(id)
+  local node = gui.new_box_node(vmath.vector3(0), vmath.vector3(0))
+  gui.set_id(node, id)
+  gui.set_visible(node, false)
+  return node
+end
+
+local function set_element_first(list, element)
+  local pos = 0
+  for i, el in ipairs(list) do
+    if el == element then
+      pos = i
+      break
+    end
+  end
+  if pos>1 then
+    table.remove(list, pos)
+    table.insert(list, 1, element)
+  end
+end
+
 ---@param el GuiLibElement
 local function dump_tree(el, level)
   local disabled_status = ""
@@ -44,8 +65,7 @@ return function()
       end
       return node
     end
-
-    ---@class GuiLibElement
+    ---@class GuiLibBase
     local element = {
       ---@type node
       node = __get_node(p_node),
@@ -91,11 +111,20 @@ return function()
     end
 
     element.add = function(node, actions)
+      ---@class GuiLibElement: GuiLibBase
       local child = create_element(node, namespace)
       table.insert(children, 1, child)
       if actions then
         for action_id, action in pairs(actions) do
           child.on(action_id, action)
+        end
+      end
+      child.move_to_top = function(update_index)
+        set_element_first(children, child)
+        if update_index then
+          local parent = gui.get_parent(child.node)
+          gui.set_parent(child.node, nil)
+          gui.set_parent(child.node, parent)
         end
       end
       return child
@@ -185,16 +214,15 @@ return function()
       pprint(dump_tree(element, 0))
     end
 
+    element.move_to_top = function()
+    end
+
     return element
   end
 
   ---- Make root element
-  local pseudo_element = gui.new_box_node(vmath.vector3(), vmath.vector3())
-  gui.set_id(pseudo_element, hash("guilib:root"))
-  gui.set_visible(pseudo_element, false)
-
   ---@class GuiLibRoot : GuiLibElement
-  local root_element = create_element(pseudo_element, "")
+  local root_element = create_element(make_fake_node(hash("guilib:root")), "")
   local on_input = root_element.on_input
   root_element.on_input = function(action_id, action)
       --- store active(pressed) actions in global storage
