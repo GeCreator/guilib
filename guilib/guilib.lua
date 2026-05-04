@@ -11,31 +11,8 @@ local function dump_tree(el, level)
   return result
 end
 
-local function set_element_first(list, element)
-  local pos = 0
-  for i, el in ipairs(list) do
-    if el == element then
-      pos = i
-      break
-    end
-  end
-  if pos > 1 then
-    table.remove(list, pos)
-    table.insert(list, 1, element)
-  end
-end
-
 local function clear_table(t)
   for k, v in pairs(t) do t[k] = nil end
-end
-
-local function remove_from_list(l, value)
-  for i, v in ipairs(l) do
-    if value == v then
-      table.remove(l, i)
-      return
-    end
-  end
 end
 
 local call_event = function(element, method, action)
