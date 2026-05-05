@@ -1,5 +1,6 @@
 [project]
 title = guilib
+version = 0.2.1
 
 [bootstrap]
 main_collection = /main/main.collectionc

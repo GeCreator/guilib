@@ -441,7 +441,7 @@ nodes {
     y: 90.0
   }
   type: TYPE_TEXT
-  text: "GuiLib 0.1.4"
+  text: "GuiLib %s"
   font: "default"
   id: "version"
   xanchor: XANCHOR_RIGHT
