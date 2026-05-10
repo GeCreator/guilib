@@ -72,6 +72,13 @@ return function()
       actions = {},
     }
 
+    ---Return node from current namespace
+    ---@param name string
+    ---@return node
+    element.get_node = function(name)
+      return gui.get_node(namespace .. name)
+    end
+
     ---@param set string
     ---@param append? boolean
     element.set_namespace = function(set, append)
