@@ -118,7 +118,8 @@ return function()
     end
 
     ---@param node string|userdata
-    ---@param actions table
+    ---@param actions? table
+    ---@return GuiLibElement
     element.add = function(node, actions)
       ---@class GuiLibElement: GuiLibBase
       local child = create_element(node, namespace)
