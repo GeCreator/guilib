@@ -159,10 +159,11 @@ return function()
     end
 
     element.on_input = function(action_id, action)
-      if not gui.is_enabled(element.node, true) then return end
+      if not gui.is_enabled(element.node, true) then return catched end
 
       for _, el in ipairs(children) do
         catched = el.on_input(action_id, action)
+        if catched then return catched end
       end
 
       if action_id == nil and action.x and action.y then
@@ -241,7 +242,7 @@ return function()
         pressed_action[action_id] = nil
       end
       catched = nil
-      on_input(action_id, action)
+      return on_input(action_id, action)
   end
 
   return root_element
