@@ -130,16 +130,17 @@ return function()
         end
       end
 
-      ---@param update_index? boolean
-      child.move_to_top = function(update_index)
-        set_element_first(children, child)
-        if update_index then
-          local parent = gui.get_parent(child.node)
-          gui.set_parent(child.node, nil)
-          gui.set_parent(child.node, parent)
-        end
-      end
       return child
+    end
+
+    ---@param update_index? boolean
+    element.move_to_top = function(update_index)
+      set_element_first(children, element)
+      if update_index then
+        local parent = gui.get_parent(element.node)
+        gui.set_parent(element.node, nil)
+        gui.set_parent(element.node, parent)
+      end
     end
 
     element.clear = function()
