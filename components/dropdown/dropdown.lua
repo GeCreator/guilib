@@ -1,6 +1,6 @@
 local PADDING = 2
 
----@param guilib GuiLibElement
+---@param guilib GuiLib
 ---@param template_name string
 ---
 ---@return guilib_dropdown_component

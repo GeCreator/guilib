@@ -428,6 +428,33 @@ nodes {
   template_node_child: true
 }
 nodes {
+  type: TYPE_TEMPLATE
+  id: "Components: Panel"
+  inherit_alpha: true
+  template: "/examples/components/panel/panel.gui"
+  enabled: false
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Panel/root"
+  yanchor: YANCHOR_BOTTOM
+  parent: "Components: Panel"
+  overridden_fields: 13
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Panel/box1"
+  parent: "Components: Panel/root"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "Components: Panel/box2"
+  parent: "Components: Panel/box1"
+  template_node_child: true
+}
+nodes {
   position {
     x: 1256.0
     y: 19.0

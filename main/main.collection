@@ -10,9 +10,5 @@ embedded_instances {
   "  id: \"gui\"\n"
   "  component: \"/main/gui.gui\"\n"
   "}\n"
-  "components {\n"
-  "  id: \"background\"\n"
-  "  component: \"/main/background.tilemap\"\n"
-  "}\n"
   ""
 }

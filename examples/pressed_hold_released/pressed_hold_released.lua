@@ -1,4 +1,4 @@
----@param guilib GuiLibElement
+---@param guilib GuiLib
 ---@param log fun(text: string)
 return function(guilib, log)
   -----------------------------------------------

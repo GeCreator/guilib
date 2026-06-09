@@ -1,14 +1,12 @@
----@param element GuiLibElement
----@return GuiLibElement
+---@param element GuiLib
+---@return GuiLib
 local function dragable(element)
-  local offset = vmath.vector3(0)
-  element.on("pressed", function(action)
-    local mouse_pos = vmath.vector3(action.screen_x, action.screen_y, 0)
-    offset = mouse_pos - gui.get_screen_position(action.node)
-  end)
-  element.on("hold", function(action)
-    local mouse_pos = vmath.vector3(action.screen_x, action.screen_y, 0)
-    gui.set_screen_position(action.node, mouse_pos - offset)
+  ---@param e input_action|GuiLib
+  element.on("hold", function(e)
+    local pos = gui.get_screen_position(e.node)
+    pos.x = pos.x + e.screen_dx
+    pos.y = pos.y + e.screen_dy
+    gui.set_screen_position(e.node, pos)
   end)
   return element
 end

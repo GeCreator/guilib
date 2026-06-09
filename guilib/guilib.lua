@@ -22,7 +22,7 @@ local function set_element_first(list, element)
   end
 end
 
----@param el GuiLibBase
+---@param el GuiLib
 local function dump_tree(el, level)
   local disabled_status = ""
   if not gui.is_enabled(el.node) then disabled_status = " (Disabled)" end
@@ -50,6 +50,7 @@ local call_event = function(element, method, action)
   end
 end
 
+---@return GuiLib
 return function()
   local catched = nil
 
@@ -65,7 +66,7 @@ return function()
       end
       return node
     end
-    ---@class GuiLibBase
+    ---@class GuiLib
     local element = {
       ---@type node
       node = __get_node(p_node),
@@ -119,9 +120,8 @@ return function()
 
     ---@param node string|userdata
     ---@param actions? table
-    ---@return GuiLibElement
+    ---@return GuiLib
     element.add = function(node, actions)
-      ---@class GuiLibElement: GuiLibBase
       local child = create_element(node, namespace)
       table.insert(children, 1, child)
       if actions then
@@ -218,7 +218,7 @@ return function()
       return catched
     end
 
-    ---@return table<GuiLibElement>
+    ---@return table<GuiLib>
     element.get_children = function()
       return children
     end
@@ -230,19 +230,17 @@ return function()
     return element
   end
 
-  ---- Make root element
-  ---@class GuiLibRoot : GuiLibElement
   local root_element = create_element(make_fake_node(hash("guilib:root")), "")
   local on_input = root_element.on_input
   root_element.on_input = function(action_id, action)
-      --- store active(pressed) actions in global storage
-      if action.pressed then
-        pressed_action[action_id] = true
-      elseif action.released then
-        pressed_action[action_id] = nil
-      end
-      catched = nil
-      return on_input(action_id, action)
+    --- store active(pressed) actions in global storage
+    if action.pressed then
+      pressed_action[action_id] = true
+    elseif action.released then
+      pressed_action[action_id] = nil
+    end
+    catched = nil
+    return on_input(action_id, action)
   end
 
   return root_element

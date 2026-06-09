@@ -1,7 +1,7 @@
 local slider = require("components.slider.slider")
 
----@param element GuiLibElement
+---@param guilib GuiLib
 ---@param log fun(text: string)
-return function(element, log)
-  local s = slider(element, "slider")
+return function(guilib, log)
+  local s = slider(guilib, "slider")
 end

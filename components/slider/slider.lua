@@ -16,7 +16,7 @@ local function get_scale(node)
 end
 
 
----@param guilib GuiLibElement
+---@param guilib GuiLib
 ---@param template string
 ---@return guilib_slider_component
 return function(guilib, template, min_value, max_value)
