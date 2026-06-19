@@ -44,7 +44,7 @@ local function create_element(p_node)
   local is_hovered = false
   local is_pressed = false
 
-  ---@class GuiLibBase
+  ---@class GuiLibElement
   local element = {
     ---@type node
     node = __get_node(p_node),
@@ -126,11 +126,14 @@ local function create_element(p_node)
 
   return element
 end
+---@return GuiLib
 return function()
+  ---@class GuiLib
   local guilib = {}
   local elements = {}
   local ordered_groups = {}
 
+  ---@return GuiLibElement
   guilib.add = function(node, group)
     group = group or 0
     assert(type(group) == "number")
