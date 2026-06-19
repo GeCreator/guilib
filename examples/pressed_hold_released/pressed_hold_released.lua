@@ -1,20 +1,20 @@
 ---@param guilib GuiLib
 ---@param log fun(text: string)
-return function(guilib, log)
+return function(guilib, template, log)
   -----------------------------------------------
-  local el = guilib.add("box1", {
-    pressed = function(e)
-      gui.play_flipbook(e.node, "button1")
-      log("Pressed")
-    end,
-    released = function(e)
-      gui.play_flipbook(e.node, "button0")
-      log("Released")
-    end,
-    hold = function() log("Hold") end,
-  })
+  local box1 = guilib.add(template .. "/box1")
+  box1.on("pressed", function(e)
+    gui.play_flipbook(e.node, "button1")
+    log("Pressed")
+  end)
+  box1.on("released", function(e)
+    gui.play_flipbook(e.node, "button0")
+    log("Released")
+  end)
 
-  local box2 = guilib.add("box2")
+  box1.on("hold", function() log("Hold") end)
+
+  local box2 = guilib.add(template .. "/box2")
   box2.on(hash("touch"), function(e)
     if e.pressed then
       gui.play_flipbook(e.node, "button1")
@@ -25,7 +25,7 @@ return function(guilib, log)
     else log("Hold") end
   end)
   ---------------------------------------------
-  guilib.add("box_touch_A", { pressed = function() log("A Clicked") end, })
-  guilib.add("box_touch_B", { pressed = function() log("B Clicked") end, })
+  guilib.add(template .. "/box_touch_A").on("pressed", function() log("A Clicked") end )
+  guilib.add(template .. "/box_touch_B").on("pressed", function() log("B Clicked") end )
   ---------------------------------------------
 end

@@ -10,22 +10,20 @@ local function get_children(node)
   end
   return tree
 end
----@param guilib GuiLib
-local function create_box(guilib, log)
-  guilib.on("pressed",  function() log("Drag Begin") end)
-  guilib.on("hold",  function() log("Drag") end)
-  guilib.on("released",  function() log("Drag End") end)
-  return guilib
+---@param box GuiLibElement
+local function create_box(box, log)
+  box.on("pressed",  function() log("Drag Begin") end)
+  box.on("hold",  function() log("Drag") end)
+  box.on("released",  function() log("Drag End") end)
+  return box
 end
 
----@param element GuiLib
+---@param guilib GuiLib
 ---@param log fun(text: string)
-return function(element, log)
-  local pos = gui.get_position(element.get_node('box2'))
+return function(guilib, template, log)
 
-  print(pos)
   -- pprint(get_children(element.node))
   -- components.dragable(create_box(element.add("box1"), log))
-  components.dragable(create_box(element.add("box1"), log))
+  components.dragable(create_box(guilib.add(template .. "/box1"), log))
   -- components.dragable(create_box(element.add("box3"), log))
 end

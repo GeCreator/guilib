@@ -1,4 +1,4 @@
----@param element GuiLib
+---@param element GuiLibElement
 ---@return GuiLib
 local function dragable(element)
   ---@param e input_action|GuiLib

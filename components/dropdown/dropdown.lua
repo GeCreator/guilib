@@ -5,7 +5,7 @@ local PADDING = 2
 ---
 ---@return guilib_dropdown_component
 return function(guilib, template_name)
-  local main = guilib.add(template_name .. "/root")
+  local main = guilib.add(template_name .. "/root", 1)
   local choices = {}
   local opened = false
   local NODE_CHOICE_BOX_TEMPLATE = gui.get_node(template_name .. "/choice_box_template")
@@ -14,12 +14,13 @@ return function(guilib, template_name)
   local HASH_CHOICE_BOX = hash(template_name .. "/choice_box_template")
   local HASH_CHOICE_TEXT = hash(template_name .. "/choice_text_template")
   local on_select_function = function(selection) pprint(selection.. " selected") end
-  local sub = main.add(NODE_CHOICE_BOX_CONTAINER)
+  -- local sub = guilib.add(NODE_CHOICE_BOX_CONTAINER)
 
   local function refresh()
     gui.set_enabled(NODE_CHOICE_BOX_CONTAINER, opened)
-    sub.set_enabled(opened)
+     -- /.set_enabled(opened)
   end
+
   refresh()
 
   local function select(name)
@@ -61,17 +62,11 @@ return function(guilib, template_name)
       gui.set_size(NODE_CHOICE_BOX_CONTAINER, container_size)
       local base_color = gui.get_color(clone[HASH_CHOICE_BOX])
       local hover_color = vmath.vector4(base_color.x*1.1, base_color.y*1.1, base_color.z*1.1, 1.0)
-      sub.add(clone[HASH_CHOICE_BOX], {
-        pressed = function()
-          select(name)
-        end,
-        enter = function(e)
-          gui.set_color(clone[HASH_CHOICE_BOX], hover_color)
-        end,
-        leave = function(e)
-          gui.set_color(clone[HASH_CHOICE_BOX], base_color)
-        end
-      })
+      local c = guilib.add(clone[HASH_CHOICE_BOX], 1)
+      c.on("pressed", function() select(name) end)
+      c.on("enter", function() gui.set_color(clone[HASH_CHOICE_BOX], hover_color) end)
+      c.on("leave", function() gui.set_color(clone[HASH_CHOICE_BOX], base_color) end
+      )
     end,
     ---@param fun fun(selection: string)
     on_select = function(fun)
