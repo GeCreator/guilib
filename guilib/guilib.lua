@@ -68,8 +68,7 @@ local function create_element(p_node)
   end
 
 
-  element.on_input = function(action_id, action)
-    local catched = nil
+  element.on_input = function(action_id, action, catched)
     if not gui.is_enabled(element.node, true) then return end
 
     if action_id == nil and action.x and action.y then
@@ -142,6 +141,7 @@ return function()
     if not elements[group] then
       elements[group] = {}
       table.insert(ordered_groups, { group = group, elements = elements[group] })
+      table.sort(ordered_groups, function(a,b) return a.group>b.group end)
     end
 
     table.insert(elements[group], 1, element)
@@ -156,16 +156,25 @@ return function()
     elseif action.released then
       pressed_action[action_id] = nil
     end
+    local catched = nil
     for _, group in ipairs(ordered_groups) do
       for _, el in ipairs(group.elements) do
-        local catched = el.on_input(action_id, action)
-        if catched~=nil then return catched end
+        catched = el.on_input(action_id, action, catched)
       end
+      if catched~=nil then return catched end
     end
+    return catched
   end
 
   guilib.dump = function()
-    pprint("dump")
+    local result = "guilib.dump():\n"
+    for _,group in ipairs(ordered_groups) do
+      result = result .. "group = "..tostring(group.group)..":\n"
+      for _, el in ipairs(group.elements) do
+        result = result .. "\t" .. gui.get_id(el.node) .. "\n"
+      end
+    end
+    pprint(result)
   end
 
   guilib.emit_action = function(action_id, action_data)
