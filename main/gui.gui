@@ -9,453 +9,6 @@ textures {
 }
 nodes {
   position {
-    x: 1276.0
-    y: 719.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_BOX
-  id: "logbox"
-  xanchor: XANCHOR_RIGHT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NE
-  adjust_mode: ADJUST_MODE_ZOOM
-  inherit_alpha: true
-  clipping_mode: CLIPPING_MODE_STENCIL
-  clipping_visible: false
-  clipping_inverted: true
-  size_mode: SIZE_MODE_AUTO
-  visible: false
-}
-nodes {
-  position {
-    x: -166.0
-    y: -14.0
-  }
-  scale {
-    x: 0.8
-    y: 0.8
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "log"
-  font: "default"
-  id: "logtext"
-  xanchor: XANCHOR_RIGHT
-  yanchor: YANCHOR_TOP
-  pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_STRETCH
-  parent: "logbox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -50.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Pressed/Hold/Released"
-  inherit_alpha: true
-  template: "/examples/pressed_hold_released/pressed_hold_released.gui"
-  enabled: false
-}
-nodes {
-  position {
-    x: 603.0
-    y: 380.0
-  }
-  type: TYPE_BOX
-  id: "Pressed/Hold/Released/root"
-  parent: "Pressed/Hold/Released"
-  overridden_fields: 1
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Pressed/Hold/Released/text"
-  parent: "Pressed/Hold/Released/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Pressed/Hold/Released/box1"
-  parent: "Pressed/Hold/Released/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Pressed/Hold/Released/text2"
-  parent: "Pressed/Hold/Released/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Pressed/Hold/Released/box2"
-  parent: "Pressed/Hold/Released/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Pressed/Hold/Released/box_touch_A"
-  parent: "Pressed/Hold/Released/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Pressed/Hold/Released/text4"
-  parent: "Pressed/Hold/Released/box_touch_A"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Pressed/Hold/Released/box_touch_B"
-  parent: "Pressed/Hold/Released/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Pressed/Hold/Released/text5"
-  parent: "Pressed/Hold/Released/box_touch_B"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 526.0
-    y: 382.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Hover"
-  inherit_alpha: true
-  template: "/examples/hover/hover.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Hover/root"
-  parent: "Hover"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Hover/hover_text"
-  parent: "Hover/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Hover/box_hover_A"
-  parent: "Hover/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Hover/text3"
-  parent: "Hover/box_hover_A"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Hover/box_hover_B"
-  parent: "Hover/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Hover/text6"
-  parent: "Hover/box_hover_B"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 577.0
-    y: 352.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Action"
-  inherit_alpha: true
-  template: "/examples/action/action.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Action/root"
-  parent: "Action"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Action/text"
-  parent: "Action/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Action/box"
-  parent: "Action/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Action/text9"
-  parent: "Action/box"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 596.0
-    y: 356.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Enter/Leave"
-  inherit_alpha: true
-  template: "/examples/enter_leave/enter_leave.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Enter/Leave/root"
-  parent: "Enter/Leave"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Enter/Leave/mouse_enter_leave"
-  parent: "Enter/Leave/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Enter/Leave/box_A"
-  parent: "Enter/Leave/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Enter/Leave/text1"
-  parent: "Enter/Leave/box_A"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Enter/Leave/box_B"
-  parent: "Enter/Leave/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Enter/Leave/text7"
-  parent: "Enter/Leave/box_B"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 631.0
-    y: 361.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Click Outside"
-  inherit_alpha: true
-  template: "/examples/click_outside/click_outside.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Click Outside/root"
-  parent: "Click Outside"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Click Outside/A"
-  parent: "Click Outside/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Click Outside/text4"
-  parent: "Click Outside/A"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Click Outside/B"
-  parent: "Click Outside/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Click Outside/text5"
-  parent: "Click Outside/B"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 543.0
-    y: 360.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Emit Action"
-  inherit_alpha: true
-  template: "/examples/emit_action/emit_action.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Emit Action/root"
-  parent: "Emit Action"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Emit Action/box"
-  parent: "Emit Action/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Emit Action/text9"
-  parent: "Emit Action/box"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Emit Action/box1"
-  parent: "Emit Action/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Emit Action/text"
-  parent: "Emit Action/box1"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Emit Action/box2"
-  parent: "Emit Action/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Emit Action/text1"
-  parent: "Emit Action/box2"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 635.0
-    y: 389.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Components: Dragable"
-  inherit_alpha: true
-  template: "/examples/components/dragable/dragable.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Dragable/root"
-  parent: "Components: Dragable"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "Components: Dragable/drag_text"
-  parent: "Components: Dragable/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Dragable/box1"
-  parent: "Components: Dragable/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Dragable/box2"
-  parent: "Components: Dragable/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Dragable/box3"
-  parent: "Components: Dragable/root"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 603.0
-    y: 318.0
-  }
-  type: TYPE_TEMPLATE
-  id: "Components: Slider"
-  inherit_alpha: true
-  template: "/examples/components/slider/slider.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Slider/root"
-  parent: "Components: Slider"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEMPLATE
-  id: "Components: Slider/slider"
-  parent: "Components: Slider/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Slider/slider/root"
-  parent: "Components: Slider/slider"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Slider/slider/background"
-  parent: "Components: Slider/slider/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Slider/slider/pin"
-  parent: "Components: Slider/slider/background"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEMPLATE
-  id: "Components: Panel"
-  inherit_alpha: true
-  template: "/examples/components/panel/panel.gui"
-  enabled: false
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Panel/root"
-  yanchor: YANCHOR_BOTTOM
-  parent: "Components: Panel"
-  overridden_fields: 13
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Panel/box1"
-  parent: "Components: Panel/root"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "Components: Panel/box2"
-  parent: "Components: Panel/box1"
-  template_node_child: true
-}
-nodes {
-  position {
     x: 1256.0
     y: 19.0
   }
@@ -485,61 +38,497 @@ nodes {
     y: 100.0
   }
   type: TYPE_BOX
-  id: "top_left"
+  id: "root"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_TOP
   pivot: PIVOT_NW
-  adjust_mode: ADJUST_MODE_ZOOM
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   visible: false
 }
 nodes {
   position {
-    x: 191.0
-    y: -30.0
+    x: 320.0
+    y: -265.0
   }
-  type: TYPE_TEMPLATE
-  id: "dropdown"
-  parent: "top_left"
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 256.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_key_space"
+  parent: "root"
   inherit_alpha: true
-  template: "/components/dropdown/dropdown.gui"
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
 }
 nodes {
-  type: TYPE_BOX
-  id: "dropdown/root"
-  parent: "dropdown"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_BOX
-  id: "dropdown/text_current"
-  parent: "dropdown/root"
-  template_node_child: true
-}
-nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
   type: TYPE_TEXT
-  id: "dropdown/text"
-  parent: "dropdown/text_current"
-  template_node_child: true
+  text: "key_space"
+  font: "default"
+  id: "text7"
+  parent: "box_key_space"
+  inherit_alpha: true
 }
 nodes {
+  position {
+    x: 62.0
+    y: -381.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
   type: TYPE_BOX
-  id: "dropdown/choice_container"
-  parent: "dropdown/root"
-  template_node_child: true
+  id: "logbox"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_W
+  adjust_mode: ADJUST_MODE_ZOOM
+  parent: "root"
+  inherit_alpha: true
+  clipping_mode: CLIPPING_MODE_STENCIL
+  clipping_visible: false
+  clipping_inverted: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 nodes {
-  type: TYPE_BOX
-  id: "dropdown/choice_box_template"
-  parent: "dropdown/choice_container"
-  template_node_child: true
-}
-nodes {
+  scale {
+    x: 0.8
+    y: 0.8
+  }
+  size {
+    x: 442.0
+    y: 100.0
+  }
   type: TYPE_TEXT
-  id: "dropdown/choice_text_template"
-  parent: "dropdown/choice_box_template"
-  template_node_child: true
+  text: "log"
+  font: "default"
+  id: "logtext"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_TOP
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_STRETCH
+  parent: "logbox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 320.0
+    y: -165.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 256.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_mouse_wheel"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "mouse_wheel"
+  font: "default"
+  id: "text6"
+  parent: "box_mouse_wheel"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 513.0
+    y: -265.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 252.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_click_outside"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "click_outside"
+  font: "default"
+  id: "text4"
+  parent: "box_click_outside"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 129.0
+    y: -265.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 252.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_release"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "release"
+  font: "default"
+  id: "text5"
+  parent: "box_release"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 320.0
+    y: -75.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 256.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_hover"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "hover"
+  font: "default"
+  id: "text3"
+  parent: "box_hover"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 129.0
+    y: -75.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 252.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_pressed"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "pressed"
+  font: "default"
+  id: "text1"
+  parent: "box_pressed"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 129.0
+    y: -165.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 252.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_hold"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "hold"
+  font: "default"
+  id: "text2"
+  parent: "box_hold"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 513.0
+    y: -165.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 252.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_touch"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "touch"
+  font: "default"
+  id: "text8"
+  parent: "box_touch"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 514.0
+    y: -75.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 256.0
+    y: 126.0
+  }
+  color {
+    x: 0.6
+    y: 0.8
+    z: 0.6
+  }
+  type: TYPE_BOX
+  texture: "main/button0"
+  id: "box_enter_leave"
+  parent: "root"
+  inherit_alpha: true
+  slice9 {
+    x: 16.0
+    y: 16.0
+    z: 16.0
+    w: 16.0
+  }
+}
+nodes {
+  position {
+    x: -2.0
+  }
+  scale {
+    x: 2.0
+    y: 2.0
+  }
+  size {
+    x: 20.0
+    y: 20.0
+  }
+  type: TYPE_TEXT
+  text: "enter/leave"
+  font: "default"
+  id: "text"
+  parent: "box_enter_leave"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

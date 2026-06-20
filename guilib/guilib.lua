@@ -1,29 +1,9 @@
 local TOUCH_ACTION = hash('touch')
 local pressed_action = {}
 
-local function set_element_first(list, element)
-  local pos = 0
-  for i, el in ipairs(list) do
-    if el == element then
-      pos = i
-      break
-    end
-  end
-  if pos > 1 then
-    table.remove(list, pos)
-    table.insert(list, 1, element)
-  end
-end
-
-
-local function clear_table(t)
-  for k, v in pairs(t) do t[k] = nil end
-end
-
 local call_event = function(element, method, action)
   if method then
     action.node = element.node
-    action.element = element
     action.pressed_action = pressed_action
     local result = method(action)
     if result ~= nil then
@@ -47,7 +27,7 @@ local function create_element(p_node)
   ---@class GuiLibElement
   local element = {
     ---@type node
-    node = __get_node(p_node),
+    node = p_node,
     actions = {},
   }
 
@@ -55,18 +35,8 @@ local function create_element(p_node)
   ---@param action hash|string
   ---@param handler fun(action: table)
   element.on = function(action, handler)
-    if element.actions[action] then
-      local previous_handler = element.actions[action]
-      element.actions[action] = function(e)
-        previous_handler(e)
-        handler(e)
-      end
-    else
-      element.actions[action] = handler
-    end
-    return element
+    element.actions[action] = handler
   end
-
 
   element.on_input = function(action_id, action, catched)
     if not gui.is_enabled(element.node, true) then return end
@@ -74,7 +44,7 @@ local function create_element(p_node)
     if action_id == nil and action.x and action.y then
       local do_enter = false
       local do_leave = false
-      if not catched and gui.pick_node(element.node, action.x, action.y) then
+      if gui.pick_node(element.node, action.x, action.y) then
         if not is_hovered then do_enter = true end
         catched = call_event(element, element.actions.hover, action)
       else
@@ -95,12 +65,12 @@ local function create_element(p_node)
         action.is_picked = gui.pick_node(element.node, action.x, action.y)
         if action.released then
           is_pressed = false
-          catched = call_event(element, element.actions.released, action)
+          call_event(element, element.actions.released, action)
         elseif action.pressed == false then
-          catched = call_event(element, element.actions.hold, action)
+          call_event(element, element.actions.hold, action)
         end
       end
-      if not catched and gui.pick_node(element.node, action.x, action.y) then
+      if gui.pick_node(element.node, action.x, action.y) then
         if action.pressed then
           is_pressed = true
           catched = call_event(element, element.actions.pressed, action)
@@ -111,13 +81,13 @@ local function create_element(p_node)
         end
       end
     end
-    if element.actions[action_id] and not catched then
+    if element.actions[action_id] then
       if action.x and action.y then
         if element.node and gui.pick_node(element.node, action.x, action.y) then
           catched = call_event(element, element.actions[action_id], action)
         end
       else
-        call_event(element, element.actions[action_id], action)
+        catched = call_event(element, element.actions[action_id], action)
       end
     end
     return catched
@@ -130,24 +100,18 @@ return function()
   ---@class GuiLib
   local guilib = {}
   local elements = {}
-  local ordered_groups = {}
+  local registered_elements = {}
 
-  ---@return GuiLibElement
-  guilib.add = function(node, group)
-    group = group or 0
-    assert(type(group) == "number")
-
-    local element = create_element(node)
-    if not elements[group] then
-      elements[group] = {}
-      table.insert(ordered_groups, { group = group, elements = elements[group] })
-      table.sort(ordered_groups, function(a,b) return a.group>b.group end)
+  guilib.on = function(id, event, handler)
+    local node = __get_node(id)
+    local node_id = gui.get_id(node)
+    if not registered_elements[node_id] then
+      registered_elements[node_id] = create_element(node)
+      table.insert(elements, 1, registered_elements[node_id])
     end
-
-    table.insert(elements[group], 1, element)
-    return element
+    local element = registered_elements[node_id]
+    element.on(event, handler)
   end
-
 
   guilib.on_input = function(action_id, action)
     --- store active(pressed) actions in global storage
@@ -157,32 +121,22 @@ return function()
       pressed_action[action_id] = nil
     end
     local catched = nil
-    for _, group in ipairs(ordered_groups) do
-      for _, el in ipairs(group.elements) do
-        catched = el.on_input(action_id, action, catched)
-      end
-      if catched~=nil then return catched end
+    for _, el in ipairs(elements) do
+      catched = catched or el.on_input(action_id, action, catched)
     end
     return catched
   end
 
   guilib.dump = function()
     local result = "guilib.dump():\n"
-    for _,group in ipairs(ordered_groups) do
-      result = result .. "group = "..tostring(group.group)..":\n"
-      for _, el in ipairs(group.elements) do
-        result = result .. "\t" .. gui.get_id(el.node) .. "\n"
+    for _, el in ipairs(elements) do
+      result = result .. gui.get_id(el.node) .. ":\n"
+      for k, v in pairs(el.actions) do
+        result = result .. "\t -> " .. k .. "\n"
       end
     end
     pprint(result)
   end
 
-  guilib.emit_action = function(action_id, action_data)
-    for _, group in ipairs(ordered_groups) do
-      for _, el in ipairs(group.elements) do
-        call_event(el, el.actions[action_id], action_data or {})
-      end
-    end
-  end
   return guilib
 end
