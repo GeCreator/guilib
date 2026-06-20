@@ -24,7 +24,6 @@ local function create_element(p_node)
   local is_hovered = false
   local is_pressed = false
 
-  ---@class GuiLibElement
   local element = {
     ---@type node
     node = p_node,
@@ -120,11 +119,11 @@ return function()
     elseif action.released then
       pressed_action[action_id] = nil
     end
-    local catched = nil
     for _, el in ipairs(elements) do
-      catched = catched or el.on_input(action_id, action, catched)
+      local catched = el.on_input(action_id, action)
+      if catched ~=nil then return catched end
     end
-    return catched
+    return nil
   end
 
   guilib.dump = function()

@@ -24,7 +24,7 @@ function init(self)
   msg.post(".", "acquire_input_focus")
   self.guilib = GuiLib()
   --- touch
-  self.guilib.on("box_touch", hash("touch"), function(e) log(string.format("touch pressed=%s released=%s", e.pressed, e.released)) end)
+  self.guilib.on("box_touch", hash("touch"), function(e) pprint(e) log(string.format("touch pressed=%s released=%s", e.pressed, e.released)) end)
   --- pressed
   self.guilib.on("box_pressed", "pressed", function() log("pressed") end)
   --- hold
@@ -37,9 +37,9 @@ function init(self)
   self.guilib.on("box_enter_leave", "enter", function(e) gui.play_flipbook(e.node, "button2") log("Enter") end)
   self.guilib.on("box_enter_leave", "leave", function(e) gui.play_flipbook(e.node, "button0") log("Leave") end)
   --- click_outside
-  self.guilib.on("box_click_outside", "click_outside", function(e) log("click_outside") end)
+  self.guilib.on("box_click_outside", "click_outside", function() log("click_outside") end)
   --- mouse wheel up/down
-  self.guilib.on("box_mouse_wheel", hash('mouse_wheel_up'), function(e) pprint(e) log("mouse wheel up") end)
+  self.guilib.on("box_mouse_wheel", hash('mouse_wheel_up'), function() log("mouse wheel up") end)
   self.guilib.on("box_mouse_wheel", hash('mouse_wheel_down'), function() log("mouse wheel down") end)
   --- key space
   self.guilib.on("box_key_space", hash('key_space'), function() log("key_space") end)
@@ -48,5 +48,5 @@ function init(self)
 end
 
 function on_input(self, action_id, action)
-  pprint(action_id, self.guilib.on_input(action_id, action))
+  self.guilib.on_input(action_id, action)
 end
